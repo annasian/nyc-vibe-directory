@@ -122,16 +122,26 @@
     overflow: hidden;
     isolation: isolate;
   }
-  /* Liquid chrome image, slow Ken-Burns scale */
+  /* Liquid chrome image — fallback behind the video (shows if video can't autoplay) */
   .mast::before {
     content: '';
     position: absolute;
     inset: -24px;
     background: var(--black) url('https://cdn.cosmos.so/aa47f4e7-8d7f-4a84-be99-e16367fc15bb?format=jpeg') center / cover no-repeat;
     animation: ken-burns 36s ease-in-out infinite alternate;
-    z-index: -2;
+    z-index: -3;
     pointer-events: none;
     will-change: transform;
+  }
+  /* Looping liquid video background */
+  .mast-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
   }
   /* Dark overlay + dialed-down Ferry Orange glow for readability + warmth */
   .mast::after {
@@ -504,6 +514,10 @@
 
   <!-- ============================== MAST ============================== -->
   <header class="mast">
+    <video class="mast-video" autoplay loop muted playsinline preload="auto"
+           poster="https://cdn.cosmos.so/aa47f4e7-8d7f-4a84-be99-e16367fc15bb?format=jpeg">
+      <source src="bg/liquid.mp4" type="video/mp4">
+    </video>
     <div class="row meta">
       <span class="eyebrow">obviously.nyc</span>
       <span class="eyebrow">No. 001 — May 2026</span>
