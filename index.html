@@ -4,415 +4,847 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NYC Vibe Directory — Obviously NYC</title>
-<meta name="description" content="A hand-picked directory of independent builders making real things in New York. Presented by Obviously NYC.">
+<meta name="description" content="A hand-picked directory of independent creatives, presented by Obviously NYC.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   /* ============ FONTS ============ */
-  @font-face { font-family:"STK Bureau Sans"; src:url("fonts/STKBureauSans-Light.otf") format("opentype"); font-weight:300; font-style:normal; font-display:swap; }
-  @font-face { font-family:"STK Bureau Sans"; src:url("fonts/STKBureauSans-Book.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap; }
-  @font-face { font-family:"STK Bureau Sans"; src:url("fonts/STKBureauSans-Medium.otf") format("opentype"); font-weight:500; font-style:normal; font-display:swap; }
-  @font-face { font-family:"STK Bureau Sans"; src:url("fonts/STKBureauSans-Bold.otf") format("opentype"); font-weight:700; font-style:normal; font-display:swap; }
+  @font-face {
+    font-family: "STK Bureau Sans";
+    src: url("fonts/STKBureauSans-Light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "STK Bureau Sans";
+    src: url("fonts/STKBureauSans-Book.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "STK Bureau Sans";
+    src: url("fonts/STKBureauSans-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "STK Bureau Sans";
+    src: url("fonts/STKBureauSans-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
 
   /* ============ TOKENS ============ */
-  :root{
-    --black:#161616; --white:#FFFFFF;
-    --pale-concrete:#F0F0F0; --light-concrete:#C7C7C7; --concrete:#A8ADA2; --warm-concrete:#EAE7DB;
-    --liberty-green:#CDFFD5; --ferry-orange:#FF700B;
-    --font:"STK Bureau Sans","Söhne","GT America","Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--white); color:var(--black);
-    font-family:var(--font); font-weight:400; font-size:15px; line-height:1.24; letter-spacing:-0.01em;
-    -webkit-font-smoothing:antialiased; overflow-x:hidden;
-  }
-  a{color:inherit; text-decoration:none;}
+  :root {
+    --black: #161616;
+    --white: #FFFFFF;
+    --pale-concrete: #F0F0F0;
+    --light-concrete: #C7C7C7;
+    --concrete: #A8ADA2;
+    --warm-concrete: #EAE7DB;
+    --liberty-green: #CDFFD5;
+    --ferry-orange: #FF700B;
 
-  .eyebrow{font-weight:700; font-size:11px; line-height:1.24; letter-spacing:0; text-transform:uppercase;}
+    --font: "STK Bureau Sans", "Söhne", "GT America", "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font);
+    font-weight: 400; /* Book */
+    font-size: 15px;
+    line-height: 1.24;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  /* ============ TYPE ROLES ============ */
+  .eyebrow {
+    font-weight: 700; /* Bold */
+    font-size: 11px;
+    line-height: 1.24;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  h1, .headline {
+    font-weight: 300; /* Light */
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: 0;
+    margin: 0;
+  }
+  .subhead {
+    font-weight: 300; /* Light */
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .body {
+    font-weight: 400; /* Book */
+    font-size: 16px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  .pill, .cta {
+    font-weight: 400; /* Book */
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    /* Title Case applied at content layer */
+  }
+
+  /* ============ FRAME / MARGINS ============ */
+  .frame {
+    padding: 0 32px;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
 
   /* ============ NAV ============ */
-  .nav{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 32px; mix-blend-mode:difference; color:var(--white);
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 18px 32px;
+    mix-blend-mode: difference;
+    color: var(--white);
+    pointer-events: none;
   }
-  .nav .brand{display:flex; align-items:center; gap:12px;}
-  .nav .brand .sym{width:30px; height:30px; color:var(--white);}
-  .nav .brand .sym svg{width:100%; height:100%; display:block;}
-  .nav .brand .sym svg path{fill:currentColor;}
-  .nav .brand .nm{font-weight:700; font-size:12px; letter-spacing:0.02em; text-transform:uppercase;}
-  .nav .links{display:flex; align-items:center; gap:26px;}
-  .nav .links a{font-weight:500; font-size:12px; letter-spacing:0.01em; text-transform:uppercase; opacity:0.85;}
-  .nav .links a:hover{opacity:1;}
-  .nav .nominate{
-    font-weight:700; font-size:12px; letter-spacing:0.02em; text-transform:uppercase;
-    border:1.5px solid var(--white); border-radius:999px; padding:9px 18px; opacity:1;
+  .nav .links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    pointer-events: auto;
   }
-  @media(max-width:820px){ .nav .links a:not(.nominate){display:none;} }
+  .nav .links a {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.85;
+    cursor: pointer;
+  }
+  .nav .links a:hover { opacity: 1; }
+  .nav .links a.nominate {
+    font-weight: 700;
+    border: 1.5px solid var(--white);
+    border-radius: 999px;
+    padding: 9px 18px;
+    opacity: 1;
+  }
+  @media (max-width: 820px) {
+    .nav .links a:not(.nominate) { display: none; }
+  }
 
-  /* ============ HERO ============ */
-  .hero{
-    position:relative; min-height:100svh; background:var(--black); color:var(--white);
-    padding:120px 32px 40px; display:flex; flex-direction:column; justify-content:space-between;
-    overflow:hidden; isolation:isolate;
+  /* ============ MAST ============ */
+  .mast {
+    background: var(--black);
+    color: var(--white);
+    padding: 20px 32px 40px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
   }
-  .hero::before{
-    content:''; position:absolute; inset:-24px;
-    background:var(--black) url('https://cdn.cosmos.so/aa47f4e7-8d7f-4a84-be99-e16367fc15bb?format=jpeg') center/cover no-repeat;
-    animation:ken-burns 36s ease-in-out infinite alternate; z-index:-3; will-change:transform; pointer-events:none;
+  /* Liquid chrome image — fallback behind the video (shows if video can't autoplay) */
+  .mast::before {
+    content: '';
+    position: absolute;
+    inset: -24px;
+    background: var(--black) url('https://cdn.cosmos.so/aa47f4e7-8d7f-4a84-be99-e16367fc15bb?format=jpeg') center / cover no-repeat;
+    animation: ken-burns 36s ease-in-out infinite alternate;
+    z-index: -3;
+    pointer-events: none;
+    will-change: transform;
   }
-  .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; pointer-events:none;}
-  .hero::after{
-    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  /* Looping liquid video background */
+  .mast-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
+  }
+  /* Dark overlay + dialed-down Ferry Orange glow for readability + warmth */
+  .mast::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(ellipse 60% 70% at 18% 24%, rgba(255,112,11,0.18), transparent 70%),
-      linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.82) 100%);
+      radial-gradient(ellipse 60% 70% at 20% 30%, rgba(255, 112, 11, 0.16), transparent 70%),
+      linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.78) 100%);
+    z-index: -1;
+    pointer-events: none;
   }
-  @keyframes ken-burns{0%{transform:scale(1.02) translate(0,0);}100%{transform:scale(1.08) translate(-1.5%,-2%);}}
-  @media(prefers-reduced-motion:reduce){.hero::before{animation:none;}}
-
-  .hero-top{display:flex; justify-content:space-between; align-items:baseline; gap:24px;}
-  .hero-top .eyebrow{opacity:0.85;}
-
-  .hero-mid{margin:auto 0;}
-  .hero-statement{
-    max-width:24ch; font-weight:500; font-size:clamp(13px,1.1vw,15px); line-height:1.4;
-    letter-spacing:0; text-transform:uppercase; opacity:0.9; margin:0 0 28px;
+  @keyframes ken-burns {
+    0%   { transform: scale(1.02) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-1.5%, -2%); }
   }
-  .hero-h{
-    font-weight:300; font-size:clamp(54px,12.5vw,184px); line-height:0.88; letter-spacing:-0.03em; margin:0;
+  @media (prefers-reduced-motion: reduce) {
+    .mast::before { animation: none; }
   }
-  .hero-h .l2{display:block; text-align:right; padding-right:2vw;}
-  .hero-h .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400; letter-spacing:-0.01em;}
-
-  /* floating builder name links between the two headline lines */
-  .hero-names{
-    display:flex; flex-wrap:wrap; gap:8px 22px; align-items:center;
-    margin:22px 0; padding:18px 0; border-top:1px solid rgba(255,255,255,0.22); border-bottom:1px solid rgba(255,255,255,0.22);
+  .mast .meta {
+    margin-bottom: 28px;
+    align-items: center;
   }
-  .hero-names a{
-    font-weight:400; font-size:clamp(15px,1.5vw,20px); letter-spacing:-0.01em; line-height:1;
-    display:inline-flex; align-items:center; gap:7px; opacity:0.82; transition:opacity .14s ease;
+  .mast-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
   }
-  .hero-names a .ar{font-size:0.8em; opacity:0.6; transition:transform .14s ease;}
-  .hero-names a:hover{opacity:1;}
-  .hero-names a:hover .ar{transform:translateX(4px);}
-  .hero-names .dot{opacity:0.35;}
-
-  .hero-bottom{display:flex; justify-content:space-between; align-items:flex-end; gap:24px;}
-  .scroll-cue{display:inline-flex; align-items:center; gap:10px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; opacity:0.85;}
-  .scroll-cue .line{width:46px; height:1px; background:var(--white); position:relative; overflow:hidden;}
-  .scroll-cue .line::after{content:''; position:absolute; left:-46px; top:0; width:46px; height:1px; background:var(--ferry-orange); animation:scrollline 2.2s ease-in-out infinite;}
-  @keyframes scrollline{0%{transform:translateX(0);}100%{transform:translateX(92px);}}
-  .hero-presented{display:flex; align-items:center; gap:14px;}
-  .hero-presented .lbl{opacity:0.55;}
-  .hero-presented .wm{display:block; width:130px; color:var(--white);}
-  .hero-presented .wm svg{width:100%; height:auto; display:block;}
-  .hero-presented .wm svg path{fill:currentColor;}
-  @media(max-width:820px){ .hero-presented .wm{width:104px;} }
-
-  /* ============ MANIFESTO STRIP ============ */
-  .strip{background:var(--ferry-orange); color:var(--black); padding:72px 32px;}
-  .strip p{
-    margin:0; max-width:30ch; font-weight:300; font-size:clamp(28px,4.4vw,60px); line-height:1.02; letter-spacing:-0.02em;
+  .mast-badge .badge-mark {
+    width: 30px;
+    height: 30px;
+    flex: none;
+    color: var(--white);
   }
-  .strip .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;}
-
-  /* ============ SECTION SHELL ============ */
-  section.block{padding:88px 32px;}
-  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:40px;}
-  .sec-head .num{font-weight:700; font-size:11px; text-transform:uppercase; opacity:0.5;}
-  .sec-head .t{font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.04em;}
-
-  /* ============ BROWSE (numbered big links) ============ */
-  .browse a{
-    display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:24px;
-    padding:30px 8px; border-top:1px solid var(--black); transition:background .14s ease, padding .14s ease;
+  .mast-badge .badge-mark svg { width: 100%; height: 100%; display: block; }
+  .mast-badge .badge-mark svg path { fill: currentColor; }
+  .mast-badge .badge-name {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--white);
   }
-  .browse a:last-child{border-bottom:1px solid var(--black);}
-  .browse a:hover{background:var(--liberty-green); padding-left:24px;}
-  .browse .bn{font-weight:700; font-size:13px; text-transform:uppercase; opacity:0.5;}
-  .browse .bt{font-weight:300; font-size:clamp(30px,5.2vw,64px); line-height:0.96; letter-spacing:-0.02em;}
-  .browse .bd{max-width:34ch; font-weight:400; font-size:14px; line-height:1.4; opacity:0.7; text-align:right; justify-self:end;}
-  .browse .bar{font-weight:300; font-size:32px; transition:transform .15s ease;}
-  .browse a:hover .bar{transform:translateX(8px);}
-  @media(max-width:720px){ .browse a{grid-template-columns:48px 1fr; } .browse .bd,.browse .bar{display:none;} }
-
-  /* ============ ROSTER GRID ============ */
-  .roster-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:36px; flex-wrap:wrap;}
-  .roster-head h2{font-weight:300; font-size:clamp(34px,6vw,82px); line-height:0.92; letter-spacing:-0.025em; margin:0;}
-  .roster-head h2 .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;}
-  .roster-head .lede{max-width:36ch; font-weight:400; font-size:15px; line-height:1.45; opacity:0.75;}
-  .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--black); border:1px solid var(--black);}
-  .card{
-    background:var(--white); padding:24px 20px 20px; min-height:230px;
-    display:flex; flex-direction:column; justify-content:space-between; transition:background .14s ease;
+  .mast .title {
+    font-weight: 300; /* Light */
+    font-size: clamp(26px, 8.2vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 0 auto;
+    max-width: none;
+    white-space: nowrap;
+    color: var(--white);
   }
-  .card:hover{background:var(--liberty-green);}
-  .card .ci{font-weight:700; font-size:11px; text-transform:uppercase; opacity:0.5;}
-  .card .cmid{margin-top:auto;}
-  .card .cn{font-weight:400; font-size:clamp(22px,2vw,28px); line-height:1.0; letter-spacing:-0.015em; margin:18px 0 8px;}
-  .card .cdisc{font-weight:400; font-size:13px; line-height:1.4; opacity:0.7;}
-  .card .cfoot{display:flex; align-items:center; justify-content:space-between; margin-top:18px;}
-  .card .ctag{font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:0.04em; border:1px solid var(--black); border-radius:999px; padding:5px 10px;}
-  .card .car{font-weight:300; font-size:22px; transition:transform .15s ease;}
-  .card:hover .car{transform:translateX(6px);}
-  .card.join{background:var(--black); color:var(--white); justify-content:center; align-items:flex-start; gap:14px;}
-  .card.join:hover{background:var(--ferry-orange); color:var(--black);}
-  .card.join .jt{font-weight:300; font-size:clamp(22px,2vw,30px); line-height:1.0; letter-spacing:-0.015em;}
-  .card.join .jc{font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; display:inline-flex; align-items:center; gap:8px;}
-  @media(max-width:980px){ .grid{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:520px){ .grid{grid-template-columns:1fr;} .card{min-height:180px;} }
-
-  /* ============ WHY (dark editorial) ============ */
-  .why{background:var(--black); color:var(--white);}
-  .why .sec-head .num,.why .sec-head .t{opacity:0.6;}
-  .why-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start;}
-  .why h2{font-weight:300; font-size:clamp(30px,4.6vw,58px); line-height:1.0; letter-spacing:-0.025em; margin:0 0 28px; max-width:16ch;}
-  .why h2 .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;}
-  .why p{font-weight:400; font-size:clamp(15px,1.3vw,18px); line-height:1.55; opacity:0.82; margin:0 0 18px; max-width:46ch;}
-  @media(max-width:820px){ .why-grid{grid-template-columns:1fr; gap:28px;} }
-
-  /* ============ BIG CTA ============ */
-  .cta{background:var(--liberty-green); color:var(--black); padding:96px 32px; text-align:center;}
-  .cta .lbl{font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; opacity:0.6; margin-bottom:18px;}
-  .cta h2{font-weight:300; font-size:clamp(40px,8vw,116px); line-height:0.92; letter-spacing:-0.03em; margin:0 0 36px;}
-  .cta h2 .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;}
-  .cta .btn{
-    display:inline-flex; align-items:center; gap:12px; background:var(--black); color:var(--white);
-    font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em;
-    padding:18px 30px; border-radius:999px; transition:transform .15s ease;
+  .mast .title .vibe {
+    font-family: "Instrument Serif", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
-  .cta .btn:hover{transform:translateY(-2px);}
-  .cta .btn .ar{transition:transform .15s ease;}
-  .cta .btn:hover .ar{transform:translateX(5px);}
+  .mast .presented {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .mast .presented .label {
+    opacity: 0.6;
+    color: var(--white);
+  }
+  .wordmark-card {
+    display: inline-flex;
+    background: transparent;
+    color: var(--white);
+    padding: 9px 13px;
+    border: 1.5px solid var(--ferry-orange);
+    border-radius: 3px;
+  }
+  .mast .wordmark {
+    display: block;
+    width: 100%;
+    max-width: 112px;
+    height: auto;
+  }
+  .mast .wordmark svg { width: 100%; height: auto; display: block; }
+  .mast .wordmark svg path { fill: currentColor; }
+  .mast .sublede {
+    margin: 24px auto 0;
+    max-width: 48ch;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+
+  /* ============ FILTERS ============ */
+  .filters-wrap {
+    background: var(--white);
+    padding: 48px 32px 24px;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--black);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    background: var(--pale-concrete);
+    color: var(--black);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .pill:hover { background: var(--warm-concrete); }
+  .pill.active {
+    background: var(--ferry-orange);
+    color: var(--black);
+  }
+  .filters .search-wrap {
+    margin-left: auto;
+    flex: 0 1 220px;
+    min-width: 0;
+  }
+  .filters input[type="search"] {
+    width: 100%;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--black);
+    background: var(--white);
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    outline: none;
+  }
+  .filters input[type="search"]::placeholder { color: var(--black); opacity: 0.5; }
+
+  /* ============ LIST ============ */
+  .list { padding: 8px 32px 40px; }
+  a.entry {
+    display: grid;
+    grid-template-columns: 56px 1fr auto auto;
+    align-items: baseline;
+    gap: 28px;
+    padding: 28px 4px;
+    text-decoration: none;
+    color: var(--black);
+    border-bottom: 1px solid var(--black);
+    transition: background 0.12s ease;
+  }
+  a.entry:hover { background: var(--liberty-green); }
+  a.entry .idx {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    align-self: center;
+  }
+  a.entry .name {
+    font-weight: 300; /* Light, matches headlines */
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+  }
+  a.entry .by {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    max-width: 64ch;
+    color: var(--black);
+  }
+  a.entry .tag {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid var(--black);
+    border-radius: 999px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  a.entry .arrow {
+    align-self: center;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1;
+    transition: transform 0.15s ease;
+  }
+  a.entry:hover .arrow { transform: translateX(8px); }
+  a.entry.hidden { display: none; }
 
   /* ============ MARQUEE ============ */
-  .marquee{background:var(--black); color:var(--white); padding:26px 0; overflow:hidden; border-top:1px solid rgba(255,255,255,0.15); border-bottom:1px solid rgba(255,255,255,0.15);}
-  .marquee .track{display:inline-flex; white-space:nowrap; will-change:transform; animation:marquee 26s linear infinite;}
-  .marquee span{font-weight:300; font-size:clamp(28px,4vw,52px); letter-spacing:-0.02em; padding:0 26px;}
-  .marquee span .ital{font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;}
-  .marquee .star{opacity:0.45;}
-  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-  @media(prefers-reduced-motion:reduce){.marquee .track{animation:none;}}
+  .marquee {
+    background: var(--black);
+    color: var(--white);
+    padding: 24px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .marquee .track {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 26s linear infinite;
+  }
+  .marquee span {
+    font-weight: 300;
+    font-size: clamp(26px, 4vw, 50px);
+    letter-spacing: -0.02em;
+    padding: 0 24px;
+  }
+  .marquee span .ital {
+    font-family: "Instrument Serif", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .marquee .star { opacity: 0.45; }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee .track { animation: none; }
+  }
+
+  /* ============ MANIFESTO ============ */
+  .manifesto {
+    background: var(--ferry-orange);
+    color: var(--black);
+    padding: 72px 32px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
+  .manifesto p {
+    margin: 0;
+    max-width: 30ch;
+    text-align: center;
+    font-weight: 300;
+    font-size: clamp(24px, 3.6vw, 48px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+  .manifesto .ital {
+    font-family: "Instrument Serif", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+  }
 
   /* ============ FOOTER ============ */
-  footer{background:var(--black); color:var(--white); padding:56px 32px 32px;}
-  footer .lockup-wrap{display:flex; justify-content:space-between; align-items:flex-end; gap:32px; flex-wrap:wrap;}
-  footer .presented{font-weight:700; font-size:11px; letter-spacing:0; text-transform:uppercase; opacity:0.6; margin-bottom:12px;}
-  footer .technyc{display:block; width:clamp(180px,22vw,260px); color:var(--white);}
-  footer .technyc svg{width:100%; height:auto; display:block;}
-  footer .technyc svg path{fill:currentColor;}
-  footer .nav-foot{display:flex; gap:22px; flex-wrap:wrap;}
-  footer .nav-foot a{font-weight:500; font-size:12px; text-transform:uppercase; opacity:0.7;}
-  footer .nav-foot a:hover{opacity:1; color:var(--liberty-green);}
-  footer .stamp{margin-top:48px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; font-weight:700; font-size:11px; text-transform:uppercase; opacity:0.5;}
-  footer .symbol{width:48px; height:48px; color:var(--white);}
-  footer .symbol svg{width:100%; height:100%; display:block;}
-  footer .symbol svg path{fill:currentColor;}
-
-  @media(max-width:720px){
-    .nav{padding:14px 20px;}
-    .hero{padding:96px 20px 28px;}
-    .strip{padding:52px 20px;}
-    section.block{padding:60px 20px;}
-    .cta{padding:64px 20px;}
-    footer{padding:40px 20px 24px;}
+  footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 56px 32px 32px;
+    margin-top: 0;
   }
+  footer .lockup-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  footer .presented {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+  footer .technyc {
+    display: block;
+    width: clamp(180px, 22vw, 260px);
+    color: var(--white);
+  }
+  footer .technyc svg { width: 100%; height: auto; display: block; }
+  footer .technyc svg path { fill: currentColor; }
+  footer .colophon {
+    color: var(--white);
+    text-align: right;
+    line-height: 1.1;
+  }
+  footer .colophon a { text-decoration: none; }
+  footer .colophon a:hover { color: var(--liberty-green); opacity: 1; }
+  footer .pitch-cta {
+    display: inline-block;
+    font-weight: 700;
+    font-size: clamp(20px, 2.6vw, 28px);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 1;
+    text-decoration: none;
+    line-height: 1.1;
+    transition: color 0.15s ease;
+  }
+  footer .pitch-cta:hover { color: var(--ferry-orange); }
+  footer .stamp {
+    margin-top: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.5;
+  }
+  footer .symbol {
+    width: 52px;
+    height: 52px;
+    color: var(--white);
+  }
+  footer .symbol svg { width: 100%; height: 100%; display: block; }
+  footer .symbol svg path { fill: currentColor; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 720px) {
+    .frame { padding: 0 20px; }
+    .mast { padding: 16px 20px 32px; }
+    .mast .meta { margin-bottom: 20px; }
+    .mast .presented { margin-top: 20px; gap: 12px; }
+    .mast .wordmark { max-width: 96px; }
+    .mast .sublede { margin-top: 18px; font-size: 15px; }
+    .filters-wrap { padding: 24px 20px; }
+    .list { padding: 8px 20px 32px; }
+    a.entry { grid-template-columns: 32px 1fr; gap: 16px; padding: 22px 0; }
+    a.entry .tag, a.entry .arrow { display: none; }
+    .manifesto { padding: 44px 20px; }
+    footer { padding: 40px 20px 24px; }
+  }
+
+  /* ============ VIEW TOGGLE ============ */
+  .view-toggle {
+    display: inline-flex;
+    gap: 4px;
+    margin-left: 8px;
+  }
+  .view-toggle .vbtn {
+    background: none;
+    border: 1px solid var(--black);
+    padding: 0 14px;
+    height: 32px;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .view-toggle .vbtn.active {
+    background: var(--black);
+    color: var(--white);
+  }
+  /* View modes: Builders (default) vs Projects */
+  .project-field { display: none; }
+  body.view-projects .project-field { display: block; }
+  body.view-projects .builder-field { display: none; }
+
+  /* ============ MAP VIEW ============ */
+  .map-view {
+    display: none;
+    padding: 24px 32px 64px;
+    background: var(--white);
+  }
+  .map-view.active { display: block; }
+  .map-frame {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .map-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .map-svg .borough {
+    fill: var(--pale-concrete);
+    stroke: var(--black);
+    stroke-width: 1.5;
+  }
+  .map-svg .borough-label {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    fill: var(--black);
+  }
+  .map-svg .dot {
+    fill: var(--ferry-orange);
+    stroke: var(--black);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: transform 0.15s ease, fill 0.15s ease;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .map-svg .dot-group:hover .dot {
+    fill: var(--liberty-green);
+    transform: scale(1.35);
+  }
+  .map-svg .dot-label {
+    font-family: var(--font);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    fill: var(--black);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+  .map-svg .dot-group:hover .dot-label { opacity: 1; }
+  .map-svg .dot-bg {
+    fill: var(--white);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s ease;
+  }
+  .map-svg .dot-group:hover .dot-bg { opacity: 0.85; }
+  .map-note {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--black);
+    opacity: 0.5;
+  }
+  .list.list-hidden { display: none; }
+
 </style>
 </head>
 <body>
 
-  <!-- ============ NAV ============ -->
+  <!-- ============================== NAV ============================== -->
   <nav class="nav">
-    <a class="brand" href="#top">
-      <span class="sym" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 662"><path d="M129.47,341.18c-.88-18.44-14.59-28.3-37.58-27.16-22.99,1.14-35.69,12.25-34.74,30.7.88,18.44,14.59,28.3,37.58,27.16,22.99-1.14,35.69-12.19,34.74-30.7Z"/><path d="M467.51,489.62c-14.21,11.81-13.83,28.68.89,46.36,14.72,17.69,31.2,21.16,45.41,9.35,14.21-11.81,13.83-28.68-.88-46.36-14.72-17.75-31.2-21.16-45.41-9.35Z"/><path d="M343.59,582.91c-8.15.44-12.63,5.12-12.19,12.82l.06-.06c.38,7.39,5.49,11.37,14.09,10.93l24.19-1.33-1.33-23.75-24.82,1.39Z"/><path d="M342.26,565.22l25.27-1.39-1.39-25.14-25.26,1.39c-10.42.57-16.11,5.62-15.6,14.53.38,7.07,6.51,11.18,16.99,10.61Z"/><path d="M331,0C148.17,0,0,148.21,0,331c0,182.79,148.21,331,331,331s331-148.17,331-331S513.83,0,331,0ZM472.27,144.69l12.44-72.64,20.28,16.42-9.6,46.05,42.57-19.58,19.64,15.92-68.6,27.35-25.26,31.2-16.74-13.52,25.27-31.2ZM359.58,34.84l21.16,4.11-16.36,84.13,51.04,9.92-3.6,18.63-72.2-14.02,19.96-102.77ZM226.11,54.86c24.38-9.6,42.64-3.41,51.35,16.8l-20.59,8.08c-4.36-9.03-13.96-12.25-25.39-7.77-9.6,3.79-14.09,10.61-11.75,16.49,7.07,18.06,60.95-16.93,75.54,20.15,7.45,19.07-3.22,36.57-28.17,46.42-26.09,10.23-45.29,3.28-55.02-18.63l21.03-8.28c5.05,11.18,15.22,14.72,28.74,9.41,11.88-4.67,15.92-12.13,13.45-18.32-7.52-19.2-61.65,15.1-75.79-20.91-6.95-17.62,2.84-34.17,26.59-43.46ZM78.56,184.35l55.33,37.27c11.56,7.83,22.61,5.56,30.45-6.13,7.77-11.56,5.75-22.61-5.81-30.44l-55.33-37.27,12.06-17.88,53.69,36.19c20.97,14.15,25.08,37.39,10.23,59.37s-37.96,27.03-58.99,12.89l.06.06-53.69-36.19,12-17.88ZM39.28,345.6c-1.52-31.2,18.7-52.36,51.54-53.94,32.85-1.64,55.02,17.5,56.59,48.64,1.52,31.2-18.7,52.36-51.54,54-32.84,1.58-55.01-17.5-56.59-48.7ZM91.64,496.75l-11.5-18.19,88.55-55.71,11.49,18.19-88.55,55.71ZM226.12,608.49l-20.47-12.13,20.59-82.24-61.46,58.17-19.96-11.81,81.73-73.14,24.25,14.4-24.7,106.74ZM298.73,349.96v-29.15c0-2.4-1.95-4.35-4.35-4.35h-8.12c-2.41,0-4.36,1.95-4.36,4.35v58.6c0,2.41-1.95,4.35-4.35,4.35h-24.94c-2.4,0-4.35-1.95-4.35-4.35v-100.67c0-2.4,1.95-4.35,4.35-4.35h45.98c2.41,0,4.35,1.95,4.35,4.35v20.74c0,2.41,1.95,4.36,4.36,4.36h12.32c2.41,0,4.35,1.95,4.35,4.36v29.15c0,2.41,1.95,4.35,4.36,4.35h8.12c2.4,0,4.35-1.95,4.35-4.35v-58.6c0-2.4,1.95-4.35,4.36-4.35h24.94c2.41,0,4.36,1.95,4.36,4.35v100.67c0,2.41-1.95,4.35-4.36,4.35h-45.98c-2.41,0-4.36-1.95-4.36-4.35v-20.74c0-2.41-1.95-4.35-4.35-4.35h-12.32c-2.41,0-4.36-1.95-4.36-4.36ZM393.55,622.95l-48.26,2.65c-20.72,1.14-34.68-9.79-35.56-25.96-.51-9.41,4.55-16.8,13.39-21.85-12.32-3.41-19.64-11.68-20.28-23.18-1.01-18.44,12.82-32.15,35.25-33.35l49.77-2.72,5.75,104.41h-.06ZM420.73,379.4v-41.77c0-2.41-1.95-4.35-4.36-4.35h-24.94c-2.41,0-4.35-1.95-4.35-4.36v-50.18c0-2.4,1.95-4.35,4.35-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v37.56c0,2.41,1.95,4.36,4.35,4.36h16.53c2.41,0,4.36-1.95,4.36-4.36v-37.56c0-2.4,1.95-4.35,4.36-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v50.18c0,2.41-1.95,4.36-4.36,4.36h-24.94c-2.4,0-4.35,1.95-4.35,4.35v41.77c0,2.41-1.95,4.35-4.35,4.35h-33.36c-2.41,0-4.36-1.95-4.36-4.35ZM525.24,559.1c-24,19.96-53.12,16.48-74.09-8.78-21.03-25.33-19.07-54.51,4.93-74.47,24-19.96,53.12-16.49,74.09,8.78,21.03,25.33,19.07,54.51-4.93,74.47ZM552.18,341.69h58.6c2.4,0,4.35,1.95,4.35,4.36v33.36c0,2.41-1.95,4.35-4.35,4.35h-62.8c-2.41,0-4.36-1.95-4.36-4.35v-16.53c0-2.4-1.95-4.35-4.35-4.35h-29.15c-2.41,0-4.36-1.95-4.36-4.36v-50.18c0-2.41,1.95-4.36,4.36-4.36h29.15c2.41,0,4.35-1.95,4.35-4.36v-16.53c0-2.4,1.95-4.35,4.36-4.35h62.8c2.4,0,4.35,1.95,4.35,4.35v33.36c0,2.41-1.95,4.36-4.35,4.36h-58.6c-2.41,0-4.35,1.95-4.35,4.35v16.53c0,2.41,1.95,4.35,4.35,4.35Z"/></svg>
-      </span>
-      <span class="nm">Obviously NYC</span>
-    </a>
     <div class="links">
-      <a href="directory.html">Builders</a>
-      <a href="directory.html">Projects</a>
-      <a href="directory.html">Map</a>
-      <a href="#why">About</a>
+      <a href="#list" data-nav-view="builders">Builders</a>
+      <a href="#list" data-nav-view="projects">Projects</a>
+      <a href="#map" data-nav-view="map">Map</a>
+      <a href="#about">About</a>
       <a class="nominate" href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">Nominate</a>
     </div>
   </nav>
 
-  <!-- ============ HERO ============ -->
-  <header class="hero" id="top">
-    <video class="hero-video" autoplay loop muted playsinline preload="auto"
+  <!-- ============================== MAST ============================== -->
+  <header class="mast">
+    <video class="mast-video" autoplay loop muted playsinline preload="auto"
            poster="https://cdn.cosmos.so/aa47f4e7-8d7f-4a84-be99-e16367fc15bb?format=jpeg">
       <source src="bg/liquid.mp4" type="video/mp4">
     </video>
-
-    <div class="hero-top">
-      <span class="eyebrow">obviously.nyc</span>
-      <span class="eyebrow">No. 001 — May 2026</span>
-    </div>
-
-    <div class="hero-mid">
-      <p class="hero-statement">A hand-picked directory of independent builders making real things in New York.</p>
-
-      <h1 class="hero-h">
-        <span class="l1">INDEPENDENT</span>
-
-        <span class="hero-names" aria-label="Featured builders">
-          <a href="https://www.instagram.com/paigepiskin/" target="_blank" rel="noopener">Paige Piskin <span class="ar">↗</span></a>
-          <span class="dot">·</span>
-          <a href="https://rhizome.org/7x7/" target="_blank" rel="noopener">Rhizome 7x7 <span class="ar">↗</span></a>
-          <span class="dot">·</span>
-          <a href="https://genekogan.com" target="_blank" rel="noopener">Gene Kogan <span class="ar">↗</span></a>
-          <span class="dot">·</span>
-          <a href="directory.html">Debit <span class="ar">↗</span></a>
-          <span class="dot">·</span>
-          <a href="directory.html">Karyn Nakamura <span class="ar">↗</span></a>
-        </span>
-
-        <span class="l2">BUILDERS, <span class="ital">in&nbsp;New&nbsp;York</span></span>
-      </h1>
-    </div>
-
-    <div class="hero-bottom">
-      <a class="scroll-cue" href="#browse"><span class="line"></span> Scroll</a>
-      <div class="hero-presented">
-        <span class="eyebrow lbl">Presented by</span>
-        <div class="wm" aria-label="Obviously NYC">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 954.98 276.01" aria-hidden="true">
-            <path d="M597.27,276c-40.2,0-60.74-24.79-60.74-63.55s21.23-63.55,61.09-63.55c32.02,0,55.87,16.94,55.34,45.22h-28.72c-1.39-16.93-8.01-21.82-27.5-21.82-24.02,0-30.28,6.46-30.28,40.33s6.44,39.98,30.28,39.98c19.49,0,26.11-5.06,27.5-21.82h28.72c.52,28.11-23.32,45.22-55.69,45.22h0Z"/><path d="M456.4,273.6l21.42-45.68c.32-.68-.18-1.46-.93-1.46h-18.61c-2.01,0-3.83-1.17-4.66-3l-32.75-72.07h29.43l27.07,59.63c.5,1.1,1.59,1.8,2.8,1.8h2.68c1.19,0,2.28-.69,2.78-1.77l27.84-59.66h28.98l-57.08,122.21h-28.99.02Z"/><path d="M327.3,273.6h-25.58v-122.21h35.33c14.13,24.78,39.15,73.03,44.05,82.51.53,1.02,1.57,1.64,2.72,1.64h1.67c1.7,0,3.07-1.38,3.07-3.08v-81.07h25.58v122.21h-35.15l-44.21-82.7c-.53-1-1.57-1.62-2.71-1.62h-1.7c-1.7,0-3.07,1.38-3.07,3.08v81.25h0Z"/><path fill-rule="evenodd" d="M0,63.38c0,37.89,22.45,63.73,62.65,63.73s63.18-25.84,63.18-63.38S103.38,0,63.35,0,0,25.84,0,63.38ZM66.72,103.67c-1.14.03-2.32.04-3.55.04s-2.41-.01-3.55-.04h-23.54c-3.39,0-6.14-2.76-6.14-6.16V29.61c0-3.4,2.75-6.16,6.14-6.16h23.02c1.3-.03,2.66-.05,4.07-.05s2.77.02,4.07.05h22.75c3.39,0,6.14,2.76,6.14,6.16v67.9c0,3.4-2.75,6.16-6.14,6.16h-23.27Z"/><path d="M868.93,124.7l21.42-45.68c.32-.68-.18-1.46-.93-1.46h-18.61c-2,0-3.83-1.17-4.66-3L833.41,2.49h29.43l27.07,59.63c.5,1.1,1.59,1.8,2.79,1.8h2.68c1.19,0,2.28-.69,2.78-1.77l27.84-59.66h28.98l-57.09,122.21h-28.98.02Z"/><path d="M854.58,124.66h-81.8V2.44h26.63v100.39h55.17v21.82h0Z"/><path d="M707.8,127.1c-32.72,0-52.21-15.71-52.39-40.68h27.5c.52,13.97,6.44,19.9,24.54,19.9,16.88,0,23.15-3.84,23.15-14.67,0-8.73-3.83-11.87-15.84-14.49l-22.45-4.71c-22.97-4.71-35.16-16.24-35.16-33.7,0-22.51,19.32-38.75,49.43-38.75s50.12,15.54,50.3,39.63h-27.5c-.87-13.97-7.14-18.86-23.32-18.86s-21.58,3.84-21.76,14.67c0,7.51,3.13,11.52,16.19,14.14l21.41,4.19c24.54,4.71,37.24,16.41,37.24,34.04,0,22.7-19.14,39.28-51.34,39.28h0Z"/><path d="M386.39,124.66h-26.63V2.44h26.63v122.21h0Z"/><path d="M308.94,124.66h-31.15L234.97,2.44h29.06c8.16,26.63,22.25,78.41,25.33,89.77.36,1.34,1.57,2.24,2.96,2.24h1.91c1.39,0,2.6-.9,2.96-2.25,3.06-11.4,17.06-63.34,25.15-89.76h29.41l-42.81,122.21h0Z"/><path d="M199.26,124.66h-62.83V2.44h60.04c21.76,0,36.03,10.48,36.03,29.68,0,11.97-5.82,20.88-13.47,24.19-1.26.55-2.19,1.73-2.19,3.12v2.15c0,1.45,1.02,2.69,2.4,3.13,9.59,3.01,17.61,11.63,17.61,26.95,0,18.33-10.62,33-37.59,33ZM162.19,23.05v29.51h26.45c12.53,0,16.01-2.27,16.01-14.67s-3.48-14.84-16.01-14.84h-26.45ZM162.19,71.58v32.3h28.89c13.23,0,16.88-2.44,16.88-16.24s-3.65-16.06-16.88-16.06c0,0-28.89,0-28.89,0Z"/><path fill-rule="evenodd" d="M402.58,63.38c0,37.89,22.45,63.73,62.65,63.73s63.18-25.84,63.18-63.38S505.96,0,465.93,0s-63.35,25.84-63.35,63.38ZM469.3,103.67c-1.14.03-2.32.04-3.55.04s-2.41-.01-3.55-.04h-23.54c-3.39,0-6.14-2.76-6.14-6.16V29.61c0-3.4,2.75-6.16,6.14-6.16h23.02c1.3-.03,2.66-.05,4.07-.05s2.77.02,4.07.05h22.75c3.39,0,6.14,2.76,6.14,6.16v67.9c0,3.4-2.75,6.16-6.14,6.16h-23.27Z"/><path fill-rule="evenodd" d="M539.9,80.83c0,31.43,17.75,46.27,52.04,46.27s51.86-14.84,51.86-46.27V2.44h-26.63v72.11c0,1.32,0,2.58-.03,3.79v19.12c0,3.4-2.75,6.16-6.14,6.16h-14.3c-1.53.06-3.17.09-4.93.09s-3.38-.03-4.9-.09h-14.35c-3.39,0-6.14-2.76-6.14-6.16v-19.94c-.01-.95-.02-1.94-.02-2.96V2.44h-26.45v78.39h0Z"/>
-          </svg>
-        </div>
+    <div class="row meta">
+      <div class="mast-badge" aria-label="Obviously NYC">
+        <span class="badge-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 662"><path d="M129.47,341.18c-.88-18.44-14.59-28.3-37.58-27.16-22.99,1.14-35.69,12.25-34.74,30.7.88,18.44,14.59,28.3,37.58,27.16,22.99-1.14,35.69-12.19,34.74-30.7Z"/><path d="M467.51,489.62c-14.21,11.81-13.83,28.68.89,46.36,14.72,17.69,31.2,21.16,45.41,9.35,14.21-11.81,13.83-28.68-.88-46.36-14.72-17.75-31.2-21.16-45.41-9.35Z"/><path d="M343.59,582.91c-8.15.44-12.63,5.12-12.19,12.82l.06-.06c.38,7.39,5.49,11.37,14.09,10.93l24.19-1.33-1.33-23.75-24.82,1.39Z"/><path d="M342.26,565.22l25.27-1.39-1.39-25.14-25.26,1.39c-10.42.57-16.11,5.62-15.6,14.53.38,7.07,6.51,11.18,16.99,10.61Z"/><path d="M331,0C148.17,0,0,148.21,0,331c0,182.79,148.21,331,331,331s331-148.17,331-331S513.83,0,331,0ZM472.27,144.69l12.44-72.64,20.28,16.42-9.6,46.05,42.57-19.58,19.64,15.92-68.6,27.35-25.26,31.2-16.74-13.52,25.27-31.2ZM359.58,34.84l21.16,4.11-16.36,84.13,51.04,9.92-3.6,18.63-72.2-14.02,19.96-102.77ZM226.11,54.86c24.38-9.6,42.64-3.41,51.35,16.8l-20.59,8.08c-4.36-9.03-13.96-12.25-25.39-7.77-9.6,3.79-14.09,10.61-11.75,16.49,7.07,18.06,60.95-16.93,75.54,20.15,7.45,19.07-3.22,36.57-28.17,46.42-26.09,10.23-45.29,3.28-55.02-18.63l21.03-8.28c5.05,11.18,15.22,14.72,28.74,9.41,11.88-4.67,15.92-12.13,13.45-18.32-7.52-19.2-61.65,15.1-75.79-20.91-6.95-17.62,2.84-34.17,26.59-43.46ZM78.56,184.35l55.33,37.27c11.56,7.83,22.61,5.56,30.45-6.13,7.77-11.56,5.75-22.61-5.81-30.44l-55.33-37.27,12.06-17.88,53.69,36.19c20.97,14.15,25.08,37.39,10.23,59.37s-37.96,27.03-58.99,12.89l.06.06-53.69-36.19,12-17.88ZM39.28,345.6c-1.52-31.2,18.7-52.36,51.54-53.94,32.85-1.64,55.02,17.5,56.59,48.64,1.52,31.2-18.7,52.36-51.54,54-32.84,1.58-55.01-17.5-56.59-48.7ZM91.64,496.75l-11.5-18.19,88.55-55.71,11.49,18.19-88.55,55.71ZM226.12,608.49l-20.47-12.13,20.59-82.24-61.46,58.17-19.96-11.81,81.73-73.14,24.25,14.4-24.7,106.74ZM298.73,349.96v-29.15c0-2.4-1.95-4.35-4.35-4.35h-8.12c-2.41,0-4.36,1.95-4.36,4.35v58.6c0,2.41-1.95,4.35-4.35,4.35h-24.94c-2.4,0-4.35-1.95-4.35-4.35v-100.67c0-2.4,1.95-4.35,4.35-4.35h45.98c2.41,0,4.35,1.95,4.35,4.35v20.74c0,2.41,1.95,4.36,4.36,4.36h12.32c2.41,0,4.35,1.95,4.35,4.36v29.15c0,2.41,1.95,4.35,4.36,4.35h8.12c2.4,0,4.35-1.95,4.35-4.35v-58.6c0-2.4,1.95-4.35,4.36-4.35h24.94c2.41,0,4.36,1.95,4.36,4.35v100.67c0,2.41-1.95,4.35-4.36,4.35h-45.98c-2.41,0-4.36-1.95-4.36-4.35v-20.74c0-2.41-1.95-4.35-4.35-4.35h-12.32c-2.41,0-4.36-1.95-4.36-4.36ZM393.55,622.95l-48.26,2.65c-20.72,1.14-34.68-9.79-35.56-25.96-.51-9.41,4.55-16.8,13.39-21.85-12.32-3.41-19.64-11.68-20.28-23.18-1.01-18.44,12.82-32.15,35.25-33.35l49.77-2.72,5.75,104.41h-.06ZM420.73,379.4v-41.77c0-2.41-1.95-4.35-4.36-4.35h-24.94c-2.41,0-4.35-1.95-4.35-4.36v-50.18c0-2.4,1.95-4.35,4.35-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v37.56c0,2.41,1.95,4.36,4.35,4.36h16.53c2.41,0,4.36-1.95,4.36-4.36v-37.56c0-2.4,1.95-4.35,4.36-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v50.18c0,2.41-1.95,4.36-4.36,4.36h-24.94c-2.4,0-4.35,1.95-4.35,4.35v41.77c0,2.41-1.95,4.35-4.35,4.35h-33.36c-2.41,0-4.36-1.95-4.36-4.35ZM525.24,559.1c-24,19.96-53.12,16.48-74.09-8.78-21.03-25.33-19.07-54.51,4.93-74.47,24-19.96,53.12-16.49,74.09,8.78,21.03,25.33,19.07,54.51-4.93,74.47ZM552.18,341.69h58.6c2.4,0,4.35,1.95,4.35,4.36v33.36c0,2.41-1.95,4.35-4.35,4.35h-62.8c-2.41,0-4.36-1.95-4.36-4.35v-16.53c0-2.4-1.95-4.35-4.35-4.35h-29.15c-2.41,0-4.36-1.95-4.36-4.36v-50.18c0-2.41,1.95-4.36,4.36-4.36h29.15c2.41,0,4.35-1.95,4.35-4.36v-16.53c0-2.4,1.95-4.35,4.36-4.35h62.8c2.4,0,4.35,1.95,4.35,4.35v33.36c0,2.41-1.95,4.36-4.35,4.36h-58.6c-2.41,0-4.35,1.95-4.35,4.35v16.53c0,2.41,1.95,4.35,4.35,4.35Z"/></svg></span>
+        <span class="badge-name">Obviously NYC</span>
       </div>
     </div>
+
+    <h1 class="title">NYC <span class="vibe">Vibe</span> Directory</h1>
+
+    <div class="presented">
+      <span class="eyebrow label">Presented by</span>
+      <div class="wordmark-card">
+      <div class="wordmark" aria-label="Obviously NYC">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 954.98 276.01" role="img" aria-hidden="true">
+        <path d="M597.27,276c-40.2,0-60.74-24.79-60.74-63.55s21.23-63.55,61.09-63.55c32.02,0,55.87,16.94,55.34,45.22h-28.72c-1.39-16.93-8.01-21.82-27.5-21.82-24.02,0-30.28,6.46-30.28,40.33s6.44,39.98,30.28,39.98c19.49,0,26.11-5.06,27.5-21.82h28.72c.52,28.11-23.32,45.22-55.69,45.22h0Z"/>
+        <path d="M456.4,273.6l21.42-45.68c.32-.68-.18-1.46-.93-1.46h-18.61c-2.01,0-3.83-1.17-4.66-3l-32.75-72.07h29.43l27.07,59.63c.5,1.1,1.59,1.8,2.8,1.8h2.68c1.19,0,2.28-.69,2.78-1.77l27.84-59.66h28.98l-57.08,122.21h-28.99.02Z"/>
+        <path d="M327.3,273.6h-25.58v-122.21h35.33c14.13,24.78,39.15,73.03,44.05,82.51.53,1.02,1.57,1.64,2.72,1.64h1.67c1.7,0,3.07-1.38,3.07-3.08v-81.07h25.58v122.21h-35.15l-44.21-82.7c-.53-1-1.57-1.62-2.71-1.62h-1.7c-1.7,0-3.07,1.38-3.07,3.08v81.25h0Z"/>
+        <path fill-rule="evenodd" d="M0,63.38c0,37.89,22.45,63.73,62.65,63.73s63.18-25.84,63.18-63.38S103.38,0,63.35,0,0,25.84,0,63.38ZM66.72,103.67c-1.14.03-2.32.04-3.55.04s-2.41-.01-3.55-.04h-23.54c-3.39,0-6.14-2.76-6.14-6.16V29.61c0-3.4,2.75-6.16,6.14-6.16h23.02c1.3-.03,2.66-.05,4.07-.05s2.77.02,4.07.05h22.75c3.39,0,6.14,2.76,6.14,6.16v67.9c0,3.4-2.75,6.16-6.14,6.16h-23.27Z"/>
+        <path d="M868.93,124.7l21.42-45.68c.32-.68-.18-1.46-.93-1.46h-18.61c-2,0-3.83-1.17-4.66-3L833.41,2.49h29.43l27.07,59.63c.5,1.1,1.59,1.8,2.79,1.8h2.68c1.19,0,2.28-.69,2.78-1.77l27.84-59.66h28.98l-57.09,122.21h-28.98.02Z"/>
+        <path d="M854.58,124.66h-81.8V2.44h26.63v100.39h55.17v21.82h0Z"/>
+        <path d="M707.8,127.1c-32.72,0-52.21-15.71-52.39-40.68h27.5c.52,13.97,6.44,19.9,24.54,19.9,16.88,0,23.15-3.84,23.15-14.67,0-8.73-3.83-11.87-15.84-14.49l-22.45-4.71c-22.97-4.71-35.16-16.24-35.16-33.7,0-22.51,19.32-38.75,49.43-38.75s50.12,15.54,50.3,39.63h-27.5c-.87-13.97-7.14-18.86-23.32-18.86s-21.58,3.84-21.76,14.67c0,7.51,3.13,11.52,16.19,14.14l21.41,4.19c24.54,4.71,37.24,16.41,37.24,34.04,0,22.7-19.14,39.28-51.34,39.28h0Z"/>
+        <path d="M386.39,124.66h-26.63V2.44h26.63v122.21h0Z"/>
+        <path d="M308.94,124.66h-31.15L234.97,2.44h29.06c8.16,26.63,22.25,78.41,25.33,89.77.36,1.34,1.57,2.24,2.96,2.24h1.91c1.39,0,2.6-.9,2.96-2.25,3.06-11.4,17.06-63.34,25.15-89.76h29.41l-42.81,122.21h0Z"/>
+        <path d="M199.26,124.66h-62.83V2.44h60.04c21.76,0,36.03,10.48,36.03,29.68,0,11.97-5.82,20.88-13.47,24.19-1.26.55-2.19,1.73-2.19,3.12v2.15c0,1.45,1.02,2.69,2.4,3.13,9.59,3.01,17.61,11.63,17.61,26.95,0,18.33-10.62,33-37.59,33ZM162.19,23.05v29.51h26.45c12.53,0,16.01-2.27,16.01-14.67s-3.48-14.84-16.01-14.84h-26.45ZM162.19,71.58v32.3h28.89c13.23,0,16.88-2.44,16.88-16.24s-3.65-16.06-16.88-16.06c0,0-28.89,0-28.89,0Z"/>
+        <path fill-rule="evenodd" d="M402.58,63.38c0,37.89,22.45,63.73,62.65,63.73s63.18-25.84,63.18-63.38S505.96,0,465.93,0s-63.35,25.84-63.35,63.38ZM469.3,103.67c-1.14.03-2.32.04-3.55.04s-2.41-.01-3.55-.04h-23.54c-3.39,0-6.14-2.76-6.14-6.16V29.61c0-3.4,2.75-6.16,6.14-6.16h23.02c1.3-.03,2.66-.05,4.07-.05s2.77.02,4.07.05h22.75c3.39,0,6.14,2.76,6.14,6.16v67.9c0,3.4-2.75,6.16-6.14,6.16h-23.27Z"/>
+        <path fill-rule="evenodd" d="M539.9,80.83c0,31.43,17.75,46.27,52.04,46.27s51.86-14.84,51.86-46.27V2.44h-26.63v72.11c0,1.32,0,2.58-.03,3.79v19.12c0,3.4-2.75,6.16-6.14,6.16h-14.3c-1.53.06-3.17.09-4.93.09s-3.38-.03-4.9-.09h-14.35c-3.39,0-6.14-2.76-6.14-6.16v-19.94c-.01-.95-.02-1.94-.02-2.96V2.44h-26.45v78.39h0Z"/>
+      </svg>
+    </div>
+
+    </div>
+    </div>
+
+    <p class="sublede">A living directory of independent builders in New York.</p>
   </header>
 
-  <!-- ============ MANIFESTO STRIP ============ -->
-  <section class="strip">
+  <!-- ============================== FILTERS ============================== -->
+  <div class="filters-wrap">
+    <div class="filters" role="tablist" aria-label="Filter by category">
+      <button type="button" class="pill active" data-filter="all">All</button>
+      <button type="button" class="pill" data-filter="nyc">NYC</button>
+      <button type="button" class="pill" data-filter="music">Music</button>
+      <button type="button" class="pill" data-filter="visual">Visual</button>
+      <button type="button" class="pill" data-filter="writing">Writing</button>
+      <button type="button" class="pill" data-filter="code">Code</button>
+      <div class="view-toggle">
+        <button type="button" class="vbtn active" data-view="builders">Builders</button>
+        <button type="button" class="vbtn" data-view="projects">Projects</button>
+        <button type="button" class="vbtn" data-view="map">Map</button>
+      </div>
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search" aria-label="Search the directory">
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== LIST ============================== -->
+  <section class="list" id="list">
+
+    <a class="entry" href="https://www.instagram.com/paigepiskin/" target="_blank" rel="noopener" data-cat="visual" data-tags="ar filters netflix coldplay beauty" data-borough="manhattan">
+      <span class="idx">001</span>
+      <div>
+        <div class="name builder-field">Paige Piskin</div>
+        <div class="name project-field">[Add a featured project]</div>
+        <div class="by builder-field">AR artist with 400 billion impressions across Netflix, Coldplay, and major beauty brands. Vice called her a legend; Meta called her a master.</div>
+        <div class="by project-field">Augmented-reality filters seen 400 billion times — campaigns for Netflix and Coldplay that blur the digital and the physical. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Visual</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://rhizome.org/7x7/" target="_blank" rel="noopener" data-cat="visual" data-tags="art tech program nft pairs collaboration rhizome" data-borough="manhattan">
+      <span class="idx">002</span>
+      <div>
+        <div class="name builder-field">Rhizome 7x7</div>
+        <div class="name project-field">7x7</div>
+        <div class="by builder-field">Art-tech program that pairs artists with technologists for one brief: make something new. It sparked the world's first art NFT.</div>
+        <div class="by project-field">Rhizome pairs an artist with a technologist and hands them one brief: make something new. The program sparked the world’s first art NFT. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Visual</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://vibecon.ai/#lineup" target="_blank" rel="noopener" data-cat="code" data-tags="a24 labs cinema storytelling engineer" data-borough="brooklyn">
+      <span class="idx">003</span>
+      <div>
+        <div class="name builder-field">Lucas Gelfond</div>
+        <div class="name project-field">[Add a featured project]</div>
+        <div class="by builder-field">Software engineer and writer at A24 Labs, rethinking the full stack of cinematic storytelling with code.</div>
+        <div class="by project-field">Engineering and writing at A24 Labs, rebuilding the stack of cinematic storytelling with code. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Code</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://vibecon.ai/#lineup" target="_blank" rel="noopener" data-cat="visual" data-tags="mit ai research perception engineer artist" data-borough="queens">
+      <span class="idx">004</span>
+      <div>
+        <div class="name builder-field">Karyn Nakamura</div>
+        <div class="name project-field">[Add a featured project]</div>
+        <div class="by builder-field">Tokyo-born, MIT-trained artist and engineer probing the hidden infrastructures of perception — from AI research to abandoned Gehry buildings.</div>
+        <div class="by project-field">A Tokyo-born, MIT-trained artist and engineer probing the hidden infrastructures of perception. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Visual</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://vibecon.ai/#lineup" target="_blank" rel="noopener" data-cat="music" data-tags="dj producer composer whitney venice biennale electronic" data-borough="brooklyn">
+      <span class="idx">005</span>
+      <div>
+        <div class="name builder-field">Debit</div>
+        <div class="name project-field">The Long Count</div>
+        <div class="by builder-field">Composer, producer, and DJ. Research-driven electronic music that's traveled from Latin American underground clubs to the Whitney and the Venice Biennale.</div>
+        <div class="by project-field">A record built from the digitized sounds of ancient Mesoamerican wind instruments — archival research turned into electronic music. <em>Verify title + replace with your story.</em></div>
+      </div>
+      <span class="tag">Music</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://vibecon.ai/#lineup" target="_blank" rel="noopener" data-cat="code" data-tags="creative technologist itm dhaka culture code" data-borough="brooklyn">
+      <span class="idx">006</span>
+      <div>
+        <div class="name builder-field">Saarim Zaman</div>
+        <div class="name project-field">ITM</div>
+        <div class="by builder-field">Dhaka-raised creative technologist and co-founder of ITM, building at the edges of culture and code.</div>
+        <div class="by project-field">Co-founded ITM, building at the edges of culture and code. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Code</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://genekogan.com" target="_blank" rel="noopener" data-cat="visual" data-tags="ai art ml4a abraham autonomous artist education" data-borough="bronx">
+      <span class="idx">007</span>
+      <div>
+        <div class="name builder-field">Gene Kogan</div>
+        <div class="name project-field">Abraham</div>
+        <div class="by builder-field">Artist and educator working with neural nets before most people knew what they were. Created <em>Abraham</em>, an autonomous artist programmed to make one original work every day for 13 years.</div>
+        <div class="by project-field">An autonomous artificial artist, programmed to make one original work every day for thirteen years. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Visual</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="entry" href="https://vibecon.ai/#lineup" target="_blank" rel="noopener" data-cat="visual" data-tags="post-ai film nyu itp titles royalties attribution" data-borough="manhattan">
+      <span class="idx">008</span>
+      <div>
+        <div class="name builder-field">Derrick Schultz</div>
+        <div class="name project-field">Titles</div>
+        <div class="by builder-field">Post-AI artist, filmmaker, and adjunct at NYU ITP. Product lead at Titles, a platform where artists train AI on their own work and earn royalties through built-in attribution.</div>
+        <div class="by project-field">A platform where artists train AI on their own work and earn royalties through built-in attribution — an answer to AI and ownership. <em>Placeholder — replace with your story.</em></div>
+      </div>
+      <span class="tag">Visual</span>
+      <span class="arrow">→</span>
+    </a>
+
+  </section>
+
+  <!-- ============================== MAP ============================== -->
+  <section class="map-view" id="map" aria-label="Borough map view">
+    <div class="map-frame">
+      <svg class="map-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NYC borough map">
+        <!-- Borough shapes -->
+        <rect class="borough" x="300" y="30"  width="320" height="130" rx="6"/>
+        <rect class="borough" x="250" y="180" width="170" height="320" rx="6"/>
+        <rect class="borough" x="440" y="180" width="320" height="220" rx="6"/>
+        <rect class="borough" x="440" y="420" width="280" height="170" rx="6"/>
+        <rect class="borough" x="40"  y="460" width="190" height="130" rx="6"/>
+        <!-- Borough labels -->
+        <text class="borough-label" x="315" y="58">Bronx</text>
+        <text class="borough-label" x="265" y="208">Manhattan</text>
+        <text class="borough-label" x="455" y="208">Queens</text>
+        <text class="borough-label" x="455" y="448">Brooklyn</text>
+        <text class="borough-label" x="55"  y="488">Staten Island</text>
+        <!-- Dots injected by JS -->
+        <g id="map-dots"></g>
+      </svg>
+      <p class="map-note">Proof of concept. Borough assignments are placeholders &mdash; verify before publishing.</p>
+    </div>
+  </section>
+
+  <!-- ============================== MANIFESTO ============================== -->
+  <section class="manifesto" id="about">
     <p>New York has always run on builders — people who make things because they <span class="ital">want to,</span> not because there's a term sheet waiting.</p>
   </section>
 
-  <!-- ============ BROWSE ============ -->
-  <section class="block" id="browse">
-    <div class="sec-head"><span class="num">/ 01</span><span class="t">Three ways in</span></div>
-    <div class="browse">
-      <a href="directory.html">
-        <span class="bn">/01</span>
-        <span class="bt">By Builder</span>
-        <span class="bd">The people. Browse the full hand-picked roster, A&amp;R-style.</span>
-        <span class="bar">↗</span>
-      </a>
-      <a href="directory.html">
-        <span class="bn">/02</span>
-        <span class="bt">By Project</span>
-        <span class="bd">The work. The thing they actually made, with the story behind it.</span>
-        <span class="bar">↗</span>
-      </a>
-      <a href="directory.html">
-        <span class="bn">/03</span>
-        <span class="bt">By Borough</span>
-        <span class="bd">The map. See where it's being built across the five boroughs.</span>
-        <span class="bar">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============ ROSTER ============ -->
-  <section class="block">
-    <div class="sec-head"><span class="num">/ 02</span><span class="t">The roster</span></div>
-    <div class="roster-head">
-      <h2>The people building <span class="ital">here.</span></h2>
-      <p class="lede">A starting set of independent builders working across art, music, code, and design — all based in New York. The list keeps growing.</p>
-    </div>
-    <div class="grid">
-      <a class="card" href="https://www.instagram.com/paigepiskin/" target="_blank" rel="noopener">
-        <span class="ci">001</span>
-        <div class="cmid">
-          <div class="cn">Paige Piskin</div>
-          <div class="cdisc">AR artist with 400 billion impressions — Netflix, Coldplay, and major beauty brands.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Visual</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="https://rhizome.org/7x7/" target="_blank" rel="noopener">
-        <span class="ci">002</span>
-        <div class="cmid">
-          <div class="cn">Rhizome 7x7</div>
-          <div class="cdisc">Pairs artists with technologists for one brief: make something new. Sparked the first art NFT.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Visual</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="directory.html">
-        <span class="ci">003</span>
-        <div class="cmid">
-          <div class="cn">Lucas Gelfond</div>
-          <div class="cdisc">Software engineer and writer at A24 Labs, rebuilding cinematic storytelling with code.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Code</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="directory.html">
-        <span class="ci">004</span>
-        <div class="cmid">
-          <div class="cn">Karyn Nakamura</div>
-          <div class="cdisc">MIT-trained artist and engineer probing the hidden infrastructures of perception.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Visual</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="directory.html">
-        <span class="ci">005</span>
-        <div class="cmid">
-          <div class="cn">Debit</div>
-          <div class="cdisc">Composer and DJ making research-driven electronic music — from clubs to the Whitney.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Music</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="directory.html">
-        <span class="ci">006</span>
-        <div class="cmid">
-          <div class="cn">Saarim Zaman</div>
-          <div class="cdisc">Dhaka-raised creative technologist and co-founder of ITM, building where culture meets code.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Code</span><span class="car">↗</span></div>
-      </a>
-      <a class="card" href="https://genekogan.com" target="_blank" rel="noopener">
-        <span class="ci">007</span>
-        <div class="cmid">
-          <div class="cn">Gene Kogan</div>
-          <div class="cdisc">Artist and educator behind Abraham — an autonomous artist making one work a day for 13 years.</div>
-        </div>
-        <div class="cfoot"><span class="ctag">Visual</span><span class="car">↗</span></div>
-      </a>
-      <a class="card join" href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">
-        <div class="jt">Know someone great?</div>
-        <span class="jc">Nominate a builder <span>→</span></span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============ WHY ============ -->
-  <section class="block why" id="why">
-    <div class="sec-head"><span class="num">/ 03</span><span class="t">Why it exists</span></div>
-    <div class="why-grid">
-      <h2>Proof that "Made in New York" isn't a slogan — it's a <span class="ital">roster.</span></h2>
-      <div>
-        <p>Obviously NYC's job is to make the case that New York is a real tech city, in a category of one. The directory is the piece that ties it together: a living, browsable artifact you can send to anyone — a founder, a reporter, a potential partner — that says here are the people building here. Look.</p>
-        <p>It's deliberately curated, not open. Anyone can nominate, but every entry is hand-picked. That keeps the signal high and makes it something people actually want to be on.</p>
-        <p>And it compounds. AI is reshaping who gets to build and how fast, and right now no one is telling that story as ours. The directory plants that flag — cheaply, credibly, and in a format that grows on its own.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ BIG CTA ============ -->
-  <section class="cta">
-    <div class="lbl">Self-nominations welcome</div>
-    <h2>Building something <span class="ital">good?</span></h2>
-    <a class="btn" href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">Nominate a builder <span class="ar">→</span></a>
-  </section>
-
-  <!-- ============ MARQUEE ============ -->
+  <!-- ============================== MARQUEE ============================== -->
   <div class="marquee" aria-hidden="true">
     <div class="track">
       <span>Made in New York</span><span class="star">✳</span>
@@ -426,33 +858,177 @@
     </div>
   </div>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- ============================== FOOTER ============================== -->
   <footer>
     <div class="lockup-wrap">
       <div>
         <div class="presented">Powered by</div>
         <div class="technyc" aria-label="Tech:NYC">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1193.2 271" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1193.2 271" role="img" aria-hidden="true">
             <path d="M946.7,93.4c1,0,1.8.7,2.1,1.6l17.6,69.4,18-69.4c.2-.9,1.1-1.6,2.1-1.6h38.5c1.5,0,2.5,1.5,2,2.9l-57.7,159.3c-.3.8-1.1,1.4-2,1.4h-38.6c-1.5,0-2.5-1.5-2-2.9l18.6-48.6-39-109.2c-.5-1.4.5-2.9,2-2.9h38.5ZM402.7,90c36.1,0,61.6,23.3,61.6,59.9v7.1c0,1.2-1,2.1-2.1,2.1h-81.3c1.9,10.7,7.9,20.5,22.2,20.5s17-4.4,19.9-9.4c.4-.7,1.2-1.3,2-1.3h36.7c1.2,0,2.2,1,2,2.3-2.7,17.7-25.2,38-60.3,38s-62-25.2-62-59.7,23.3-59.5,61.2-59.5ZM531,89.7c35.1,0,58.3,20.6,61.8,47.1.2,1.2-.8,2.3-2.1,2.3h-37c-1,0-1.9-.7-2.1-1.7-2.5-8.9-9.2-15.9-19-15.9s-20.5,9.8-20.5,27.8c0,17.8,8.6,27.8,20.3,27.8s17.3-7.3,19.6-17.4c.2-1,1.1-1.8,2.2-1.8h36.3c1.2,0,2.2,1,2.1,2.3-2.8,26.6-24.8,48.8-61.4,48.8s-60.1-25.2-60.1-59.7,22.5-59.7,60.1-59.7ZM1086.4,89.7c35.1,0,58.3,20.6,61.8,47.1.2,1.2-.8,2.3-2.1,2.3h-37c-1,0-1.9-.7-2.1-1.7-2.5-8.9-9.2-15.9-19-15.9s-20.5,9.8-20.5,27.8,8.5,27.8,20.3,27.8,17.3-7.3,19.6-17.4c.2-1,1.1-1.8,2.2-1.8h36.3c1.2,0,2.2,1,2.1,2.3-2.8,26.6-24.8,48.8-61.4,48.8s-60.1-25.2-60.1-59.7,22.5-59.7,60.1-59.7ZM305,64.5c1.2,0,2.1,1,2.1,2.1v26.7h25.7c1.2,0,2.1,1,2.1,2.1v25.7c0,1.2-1,2.1-2.1,2.1h-25.7v38.5c0,7.3,4.1,11.3,14.3,11.3s8-.2,10.8-.5c1.3-.1,2.5.9,2.5,2.2v29.1c0,1-.8,1.9-1.8,2.1-6,.8-12.2,1-23.4,1-27.8,0-42.3-12.2-42.3-34.2v-49.4h-12.6c-1.2,0-2.1-1-2.1-2.1v-25.7c0-1.2,1-2.1,2.1-2.2,11.5-.5,14.8-5.3,14.8-16.4v-10.3c0-1.2,1-2.1,2.1-2.1h33.6ZM641.8,43.1c1.2,0,2.1,1,2.1,2.1v58c9.2-10.1,19.7-13.3,31.2-13.3,24.6,0,38.7,14.1,38.7,40.9v72.7c0,1.2-1,2.1-2.1,2.1h-35.9c-1.2,0-2.1-1-2.1-2.1v-61.8c0-12.4-5.1-19.5-14.3-19.5s-15.4,6.4-15.4,18.8v62.5c0,1.2-1,2.1-2.1,2.1h-35.9c-1.2,0-2.1-1-2.1-2.1V45.3c0-1.2,1-2.1,2.1-2.1h35.9ZM771.7,162.9c1.2,0,2.1,1,2.1,2.1v38.5c0,1.2-1,2.1-2.1,2.1h-38.5c-1.2,0-2.1-1-2.1-2.1v-38.5c0-1.2,1-2.1,2.1-2.1h38.5ZM863.1,90c24.6,0,38.7,14.1,38.7,40.9v72.7c0,1.2-1,2.1-2.1,2.1h-35.9c-1.2,0-2.1-1-2.1-2.1v-61.8c0-12.4-5.1-19.5-14.3-19.5s-15.4,6.4-15.4,18.8v62.5c0,1.2-1,2.1-2.1,2.1h-35.9c-1.2,0-2.1-1-2.1-2.1v-108c0-1.2,1-2.1,2.1-2.1h35.9c1.2,0,2.1,1,2.1,2.1v7.7c9.2-10.1,19.7-13.3,31.2-13.3ZM402.7,119.7c-11.8,0-18.6,7.1-21.2,17.3h42.1c0-7.3-6.4-17.3-21-17.3ZM771.7,93.4c1.2,0,2.1,1,2.1,2.1v38.5c0,1.2-1,2.1-2.1,2.1h-38.5c-1.2,0-2.1-1-2.1-2.1v-38.5c0-1.2,1-2.1,2.1-2.1h38.5Z"/>
             <path fill-rule="evenodd" d="M137.5,47.2c0,1.1.9,2.1,2.1,2.1h3.3c1.4,0,2.5,1.1,2.5,2.5v41.1c0,1.1.9,2.1,2.1,2.1h14.1c1.4,0,2.5,1.1,2.5,2.5v26.1c0,1.1.9,2.1,2.1,2.1h5c1.4,0,2.5,1.1,2.5,2.5v49.8c0,1.1.9,2.1,2.1,2.1h4.6c1.4,0,2.5,1.1,2.5,2.5v19.6c0,1.7,1.9,2.7,3.2,1.6,18.3-15,29.9-37.8,29.9-63.3,0-38-25.9-70-61.1-79.3-.9-.2-1.6-1.1-1.6-2v-3.5c0-1.3,1.2-2.3,2.5-2,38.8,9.7,67.6,44.9,67.6,86.7s-40,89.4-89.4,89.4-13.7-.8-20.2-2.3c-.9-.2-1.6-1-1.6-2v-43.4c0-1.1.9-2.1,2.1-2.1h1.2c1.1,0,2.1-.9,2.1-2.1v-50.2c0-1.1.9-2.1,2.1-2.1h5.8c1.1,0,2.1-.9,2.1-2.1v-21.2c0-1.1-.9-2.1-2.1-2.1h-10.4c-1.1,0-2.1.9-2.1,2.1v21.2c0,1.1-.9,2.1-2.1,2.1h-7.5v52.3c0,1.1-.9,2.1-2.1,2.1h-7.5v37c0,1.5-1.6,2.5-3,1.8-27.7-15.2-46.4-44.6-46.4-78.4s28.6-76.7,67.2-86.6c1.3-.3,2.5.7,2.5,2v3.5c0,1-.7,1.8-1.6,2-34.9,9.4-60.7,41.3-60.7,79.2s11.5,48,29.5,63c1.3,1.1,3.3.1,3.3-1.6v-19.3c0-1.4,1.1-2.5,2.5-2.5h6.6v-51.9c0-1.4,1.1-2.5,2.5-2.5h7.1v-28.2c0-1.4,1.1-2.5,2.5-2.5h14.1c1.1,0,2.1-.9,2.1-2.1v-41.1c0-1.4,1.1-2.5,2.5-2.5h3.3c1.1,0,2.1-.9,2.1-2.1v-31.1c0-1.1.9-2.1,2.1-2.1h3.3c1.1,0,2.1.9,2.1,2.1v31.1ZM129.7,54.7c-1.1,0-2.1.9-2.1,2.1v36.1c0,1.1.9,2.1,2.1,2.1h1.2c1.1,0,2.1-.9,2.1-2.1v-36.1c0-1.1-.9-2.1-2.1-2.1h-1.2Z"/>
           </svg>
         </div>
       </div>
-      <div class="nav-foot">
-        <a href="directory.html">Builders</a>
-        <a href="directory.html">Projects</a>
-        <a href="directory.html">Map</a>
-        <a href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">Nominate</a>
+      <div class="colophon">
+        <a class="pitch-cta" href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">Nominate a builder →</a>
       </div>
     </div>
 
     <div class="stamp">
       <div class="symbol" aria-label="Obviously NYC Symbol">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 662" aria-hidden="true"><path d="M129.47,341.18c-.88-18.44-14.59-28.3-37.58-27.16-22.99,1.14-35.69,12.25-34.74,30.7.88,18.44,14.59,28.3,37.58,27.16,22.99-1.14,35.69-12.19,34.74-30.7Z"/><path d="M467.51,489.62c-14.21,11.81-13.83,28.68.89,46.36,14.72,17.69,31.2,21.16,45.41,9.35,14.21-11.81,13.83-28.68-.88-46.36-14.72-17.75-31.2-21.16-45.41-9.35Z"/><path d="M343.59,582.91c-8.15.44-12.63,5.12-12.19,12.82l.06-.06c.38,7.39,5.49,11.37,14.09,10.93l24.19-1.33-1.33-23.75-24.82,1.39Z"/><path d="M342.26,565.22l25.27-1.39-1.39-25.14-25.26,1.39c-10.42.57-16.11,5.62-15.6,14.53.38,7.07,6.51,11.18,16.99,10.61Z"/><path d="M331,0C148.17,0,0,148.21,0,331c0,182.79,148.21,331,331,331s331-148.17,331-331S513.83,0,331,0ZM472.27,144.69l12.44-72.64,20.28,16.42-9.6,46.05,42.57-19.58,19.64,15.92-68.6,27.35-25.26,31.2-16.74-13.52,25.27-31.2ZM359.58,34.84l21.16,4.11-16.36,84.13,51.04,9.92-3.6,18.63-72.2-14.02,19.96-102.77ZM226.11,54.86c24.38-9.6,42.64-3.41,51.35,16.8l-20.59,8.08c-4.36-9.03-13.96-12.25-25.39-7.77-9.6,3.79-14.09,10.61-11.75,16.49,7.07,18.06,60.95-16.93,75.54,20.15,7.45,19.07-3.22,36.57-28.17,46.42-26.09,10.23-45.29,3.28-55.02-18.63l21.03-8.28c5.05,11.18,15.22,14.72,28.74,9.41,11.88-4.67,15.92-12.13,13.45-18.32-7.52-19.2-61.65,15.1-75.79-20.91-6.95-17.62,2.84-34.17,26.59-43.46ZM78.56,184.35l55.33,37.27c11.56,7.83,22.61,5.56,30.45-6.13,7.77-11.56,5.75-22.61-5.81-30.44l-55.33-37.27,12.06-17.88,53.69,36.19c20.97,14.15,25.08,37.39,10.23,59.37s-37.96,27.03-58.99,12.89l.06.06-53.69-36.19,12-17.88ZM39.28,345.6c-1.52-31.2,18.7-52.36,51.54-53.94,32.85-1.64,55.02,17.5,56.59,48.64,1.52,31.2-18.7,52.36-51.54,54-32.84,1.58-55.01-17.5-56.59-48.7ZM91.64,496.75l-11.5-18.19,88.55-55.71,11.49,18.19-88.55,55.71ZM226.12,608.49l-20.47-12.13,20.59-82.24-61.46,58.17-19.96-11.81,81.73-73.14,24.25,14.4-24.7,106.74ZM298.73,349.96v-29.15c0-2.4-1.95-4.35-4.35-4.35h-8.12c-2.41,0-4.36,1.95-4.36,4.35v58.6c0,2.41-1.95,4.35-4.35,4.35h-24.94c-2.4,0-4.35-1.95-4.35-4.35v-100.67c0-2.4,1.95-4.35,4.35-4.35h45.98c2.41,0,4.35,1.95,4.35,4.35v20.74c0,2.41,1.95,4.36,4.36,4.36h12.32c2.41,0,4.35,1.95,4.35,4.36v29.15c0,2.41,1.95,4.35,4.36,4.35h8.12c2.4,0,4.35-1.95,4.35-4.35v-58.6c0-2.4,1.95-4.35,4.36-4.35h24.94c2.41,0,4.36,1.95,4.36,4.35v100.67c0,2.41-1.95,4.35-4.36,4.35h-45.98c-2.41,0-4.36-1.95-4.36-4.35v-20.74c0-2.41-1.95-4.35-4.35-4.35h-12.32c-2.41,0-4.36-1.95-4.36-4.36ZM393.55,622.95l-48.26,2.65c-20.72,1.14-34.68-9.79-35.56-25.96-.51-9.41,4.55-16.8,13.39-21.85-12.32-3.41-19.64-11.68-20.28-23.18-1.01-18.44,12.82-32.15,35.25-33.35l49.77-2.72,5.75,104.41h-.06ZM420.73,379.4v-41.77c0-2.41-1.95-4.35-4.36-4.35h-24.94c-2.41,0-4.35-1.95-4.35-4.36v-50.18c0-2.4,1.95-4.35,4.35-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v37.56c0,2.41,1.95,4.36,4.35,4.36h16.53c2.41,0,4.36-1.95,4.36-4.36v-37.56c0-2.4,1.95-4.35,4.36-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v50.18c0,2.41-1.95,4.36-4.36,4.36h-24.94c-2.4,0-4.35,1.95-4.35,4.35v41.77c0,2.41-1.95,4.35-4.35,4.35h-33.36c-2.41,0-4.36-1.95-4.36-4.35ZM525.24,559.1c-24,19.96-53.12,16.48-74.09-8.78-21.03-25.33-19.07-54.51,4.93-74.47,24-19.96,53.12-16.49,74.09,8.78,21.03,25.33,19.07,54.51-4.93,74.47ZM552.18,341.69h58.6c2.4,0,4.35,1.95,4.35,4.36v33.36c0,2.41-1.95,4.35-4.35,4.35h-62.8c-2.41,0-4.36-1.95-4.36-4.35v-16.53c0-2.4-1.95-4.35-4.35-4.35h-29.15c-2.41,0-4.36-1.95-4.36-4.36v-50.18c0-2.41,1.95-4.36,4.36-4.36h29.15c2.41,0,4.35-1.95,4.35-4.36v-16.53c0-2.4,1.95-4.35,4.36-4.35h62.8c2.4,0,4.35,1.95,4.35,4.35v33.36c0,2.41-1.95,4.36-4.35,4.36h-58.6c-2.41,0-4.35,1.95-4.35,4.35v16.53c0,2.41,1.95,4.35,4.35,4.35Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 662" role="img" aria-hidden="true">
+          <path d="M129.47,341.18c-.88-18.44-14.59-28.3-37.58-27.16-22.99,1.14-35.69,12.25-34.74,30.7.88,18.44,14.59,28.3,37.58,27.16,22.99-1.14,35.69-12.19,34.74-30.7Z"/>
+          <path d="M467.51,489.62c-14.21,11.81-13.83,28.68.89,46.36,14.72,17.69,31.2,21.16,45.41,9.35,14.21-11.81,13.83-28.68-.88-46.36-14.72-17.75-31.2-21.16-45.41-9.35Z"/>
+          <path d="M343.59,582.91c-8.15.44-12.63,5.12-12.19,12.82l.06-.06c.38,7.39,5.49,11.37,14.09,10.93l24.19-1.33-1.33-23.75-24.82,1.39Z"/>
+          <path d="M342.26,565.22l25.27-1.39-1.39-25.14-25.26,1.39c-10.42.57-16.11,5.62-15.6,14.53.38,7.07,6.51,11.18,16.99,10.61Z"/>
+          <path d="M331,0C148.17,0,0,148.21,0,331c0,182.79,148.21,331,331,331s331-148.17,331-331S513.83,0,331,0ZM472.27,144.69l12.44-72.64,20.28,16.42-9.6,46.05,42.57-19.58,19.64,15.92-68.6,27.35-25.26,31.2-16.74-13.52,25.27-31.2ZM359.58,34.84l21.16,4.11-16.36,84.13,51.04,9.92-3.6,18.63-72.2-14.02,19.96-102.77ZM226.11,54.86c24.38-9.6,42.64-3.41,51.35,16.8l-20.59,8.08c-4.36-9.03-13.96-12.25-25.39-7.77-9.6,3.79-14.09,10.61-11.75,16.49,7.07,18.06,60.95-16.93,75.54,20.15,7.45,19.07-3.22,36.57-28.17,46.42-26.09,10.23-45.29,3.28-55.02-18.63l21.03-8.28c5.05,11.18,15.22,14.72,28.74,9.41,11.88-4.67,15.92-12.13,13.45-18.32-7.52-19.2-61.65,15.1-75.79-20.91-6.95-17.62,2.84-34.17,26.59-43.46ZM78.56,184.35l55.33,37.27c11.56,7.83,22.61,5.56,30.45-6.13,7.77-11.56,5.75-22.61-5.81-30.44l-55.33-37.27,12.06-17.88,53.69,36.19c20.97,14.15,25.08,37.39,10.23,59.37s-37.96,27.03-58.99,12.89l.06.06-53.69-36.19,12-17.88ZM39.28,345.6c-1.52-31.2,18.7-52.36,51.54-53.94,32.85-1.64,55.02,17.5,56.59,48.64,1.52,31.2-18.7,52.36-51.54,54-32.84,1.58-55.01-17.5-56.59-48.7ZM91.64,496.75l-11.5-18.19,88.55-55.71,11.49,18.19-88.55,55.71ZM226.12,608.49l-20.47-12.13,20.59-82.24-61.46,58.17-19.96-11.81,81.73-73.14,24.25,14.4-24.7,106.74ZM298.73,349.96v-29.15c0-2.4-1.95-4.35-4.35-4.35h-8.12c-2.41,0-4.36,1.95-4.36,4.35v58.6c0,2.41-1.95,4.35-4.35,4.35h-24.94c-2.4,0-4.35-1.95-4.35-4.35v-100.67c0-2.4,1.95-4.35,4.35-4.35h45.98c2.41,0,4.35,1.95,4.35,4.35v20.74c0,2.41,1.95,4.36,4.36,4.36h12.32c2.41,0,4.35,1.95,4.35,4.36v29.15c0,2.41,1.95,4.35,4.36,4.35h8.12c2.4,0,4.35-1.95,4.35-4.35v-58.6c0-2.4,1.95-4.35,4.36-4.35h24.94c2.41,0,4.36,1.95,4.36,4.35v100.67c0,2.41-1.95,4.35-4.36,4.35h-45.98c-2.41,0-4.36-1.95-4.36-4.35v-20.74c0-2.41-1.95-4.35-4.35-4.35h-12.32c-2.41,0-4.36-1.95-4.36-4.36ZM393.55,622.95l-48.26,2.65c-20.72,1.14-34.68-9.79-35.56-25.96-.51-9.41,4.55-16.8,13.39-21.85-12.32-3.41-19.64-11.68-20.28-23.18-1.01-18.44,12.82-32.15,35.25-33.35l49.77-2.72,5.75,104.41h-.06ZM420.73,379.4v-41.77c0-2.41-1.95-4.35-4.36-4.35h-24.94c-2.41,0-4.35-1.95-4.35-4.36v-50.18c0-2.4,1.95-4.35,4.35-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v37.56c0,2.41,1.95,4.36,4.35,4.36h16.53c2.41,0,4.36-1.95,4.36-4.36v-37.56c0-2.4,1.95-4.35,4.36-4.35h33.36c2.41,0,4.36,1.95,4.36,4.35v50.18c0,2.41-1.95,4.36-4.36,4.36h-24.94c-2.4,0-4.35,1.95-4.35,4.35v41.77c0,2.41-1.95,4.35-4.35,4.35h-33.36c-2.41,0-4.36-1.95-4.36-4.35ZM525.24,559.1c-24,19.96-53.12,16.48-74.09-8.78-21.03-25.33-19.07-54.51,4.93-74.47,24-19.96,53.12-16.49,74.09,8.78,21.03,25.33,19.07,54.51-4.93,74.47ZM552.18,341.69h58.6c2.4,0,4.35,1.95,4.35,4.36v33.36c0,2.41-1.95,4.35-4.35,4.35h-62.8c-2.41,0-4.36-1.95-4.36-4.35v-16.53c0-2.4-1.95-4.35-4.35-4.35h-29.15c-2.41,0-4.36-1.95-4.36-4.36v-50.18c0-2.41,1.95-4.36,4.36-4.36h29.15c2.41,0,4.35-1.95,4.35-4.36v-16.53c0-2.4,1.95-4.35,4.36-4.35h62.8c2.4,0,4.35,1.95,4.35,4.35v33.36c0,2.41-1.95,4.36-4.35,4.36h-58.6c-2.41,0-4.35,1.95-4.35,4.35v16.53c0,2.41,1.95,4.35,4.35,4.35Z"/>
+        </svg>
       </div>
-      <span>obviously.nyc · vol. 01 · concept mockup</span>
+      <span id="updated">obviously.nyc · vol. 01 · updated —</span>
     </div>
   </footer>
+
+<script>
+  // Updated stamp
+  const d = new Date();
+  const fmt = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toLowerCase();
+  document.getElementById('updated').textContent = `obviously.nyc · vol. 01 · updated ${fmt}`;
+
+  // Filters
+  const buttons = document.querySelectorAll('.filters button[data-filter]');
+  const entries = document.querySelectorAll('a.entry');
+  const searchEl = document.getElementById('search');
+  let activeFilter = 'all';
+  let activeSearch = '';
+
+  function apply() {
+    entries.forEach(el => {
+      const cat = el.dataset.cat || '';
+      const tags = (el.dataset.tags || '').toLowerCase();
+      const text = el.textContent.toLowerCase();
+      const okCat = activeFilter === 'all' || activeFilter === 'nyc' || cat === activeFilter;
+      const okSrch = !activeSearch || text.includes(activeSearch) || tags.includes(activeSearch);
+      el.classList.toggle('hidden', !(okCat && okSrch));
+    });
+  }
+  buttons.forEach(b => b.addEventListener('click', () => {
+    buttons.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    activeFilter = b.dataset.filter;
+    apply();
+  }));
+  searchEl.addEventListener('input', e => {
+    activeSearch = e.target.value.trim().toLowerCase();
+    apply();
+  });
+
+  // ====== Borough map ======
+  const boroughBounds = {
+    bronx:           { x1: 320, y1: 80,  x2: 590, y2: 150 },
+    manhattan:       { x1: 270, y1: 230, x2: 400, y2: 490 },
+    queens:          { x1: 460, y1: 230, x2: 740, y2: 390 },
+    brooklyn:        { x1: 460, y1: 470, x2: 700, y2: 575 },
+    'staten-island': { x1: 60,  y1: 510, x2: 220, y2: 575 },
+  };
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function placeEntries() {
+    const target = document.getElementById('map-dots');
+    if (!target) return;
+    while (target.firstChild) target.removeChild(target.firstChild);
+
+    const all = document.querySelectorAll('a.entry');
+    const byBorough = {};
+    all.forEach(el => {
+      const b = el.dataset.borough;
+      if (!b || !boroughBounds[b]) return;
+      if (!byBorough[b]) byBorough[b] = [];
+      byBorough[b].push(el);
+    });
+
+    Object.entries(byBorough).forEach(([borough, list]) => {
+      const b = boroughBounds[borough];
+      const n = list.length;
+      const cols = Math.ceil(Math.sqrt(n));
+      const rows = Math.ceil(n / cols);
+      const stepX = (b.x2 - b.x1) / (cols + 1);
+      const stepY = (b.y2 - b.y1) / (rows + 1);
+      list.forEach((entry, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const cx = b.x1 + stepX * (col + 1);
+        const cy = b.y1 + stepY * (row + 1);
+        const name = entry.querySelector('.name').textContent;
+        const href = entry.getAttribute('href');
+        const g = document.createElementNS(SVG_NS, 'g');
+        g.setAttribute('class', 'dot-group');
+        const a = document.createElementNS(SVG_NS, 'a');
+        a.setAttribute('href', href);
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+        const dot = document.createElementNS(SVG_NS, 'circle');
+        dot.setAttribute('cx', cx);
+        dot.setAttribute('cy', cy);
+        dot.setAttribute('r', '8');
+        dot.setAttribute('class', 'dot');
+        a.appendChild(dot);
+        // label background (subtle pill behind text)
+        const labelW = name.length * 7 + 12;
+        const labelX = cx + 14;
+        const labelY = cy + 4;
+        const bg = document.createElementNS(SVG_NS, 'rect');
+        bg.setAttribute('x', labelX - 4);
+        bg.setAttribute('y', labelY - 12);
+        bg.setAttribute('width', labelW);
+        bg.setAttribute('height', 18);
+        bg.setAttribute('rx', 3);
+        bg.setAttribute('class', 'dot-bg');
+        const label = document.createElementNS(SVG_NS, 'text');
+        label.setAttribute('x', labelX);
+        label.setAttribute('y', labelY);
+        label.setAttribute('class', 'dot-label');
+        label.textContent = name;
+        g.appendChild(a);
+        g.appendChild(bg);
+        g.appendChild(label);
+        target.appendChild(g);
+      });
+    });
+  }
+
+  // View toggle
+  const viewButtons = document.querySelectorAll('.view-toggle .vbtn');
+  const listSection = document.getElementById('list');
+  const mapSection = document.getElementById('map');
+  viewButtons.forEach(b => b.addEventListener('click', () => {
+    viewButtons.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const view = b.dataset.view;
+    document.body.classList.toggle('view-projects', view === 'projects');
+    if (view === 'map') {
+      listSection.classList.add('list-hidden');
+      mapSection.classList.add('active');
+      placeEntries();
+    } else {
+      listSection.classList.remove('list-hidden');
+      mapSection.classList.remove('active');
+    }
+  }));
+
+  // Nav links → drive the existing view toggle + scroll the results into view
+  document.querySelectorAll('.nav [data-nav-view]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const v = link.dataset.navView;
+      const btn = document.querySelector('.view-toggle .vbtn[data-view="' + v + '"]');
+      if (btn) btn.click();
+      const fw = document.querySelector('.filters-wrap');
+      if (fw) fw.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+</script>
 
 </body>
 </html>
