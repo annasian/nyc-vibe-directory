@@ -339,7 +339,8 @@
 
   /* ============ LIST ============ */
   .list { padding: 8px 32px 40px; }
-  a.entry {
+  .entry {
+    cursor: pointer;
     display: grid;
     grid-template-columns: 56px 1fr auto auto;
     align-items: baseline;
@@ -350,21 +351,21 @@
     border-bottom: 1px solid var(--black);
     transition: background 0.12s ease;
   }
-  a.entry:hover { background: var(--liberty-green); }
-  a.entry .idx {
+  .entry:hover { background: var(--liberty-green); }
+  .entry .idx {
     font-weight: 700;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0;
     align-self: center;
   }
-  a.entry .name {
+  .entry .name {
     font-weight: 300; /* Light, matches headlines */
     font-size: clamp(28px, 3.4vw, 44px);
     line-height: 0.98;
     letter-spacing: -0.015em;
   }
-  a.entry .by {
+  .entry .by {
     margin-top: 10px;
     font-weight: 400;
     font-size: 14px;
@@ -373,7 +374,7 @@
     max-width: 64ch;
     color: var(--black);
   }
-  a.entry .tag {
+  .entry .tag {
     align-self: center;
     display: inline-flex;
     align-items: center;
@@ -386,15 +387,33 @@
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
-  a.entry .arrow {
+  .entry .arrow {
     align-self: center;
     font-weight: 300;
     font-size: 28px;
     line-height: 1;
     transition: transform 0.15s ease;
   }
-  a.entry:hover .arrow { transform: translateX(8px); }
-  a.entry.hidden { display: none; }
+  .entry:hover .arrow { transform: translateX(8px); }
+  .entry.hidden { display: none; }
+  .entry .name {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .entry a.arrow {
+    color: inherit;
+    text-decoration: none;
+  }
+  .entry .by a.maker-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .entry .by a.maker-link:hover {
+    text-decoration-thickness: 2px;
+  }
 
   /* ============ MARQUEE ============ */
   .marquee {
@@ -536,8 +555,8 @@
     .mast .sublede { margin-top: 18px; font-size: 15px; }
     .filters-wrap { padding: 24px 20px; }
     .list { padding: 8px 20px 32px; }
-    a.entry { grid-template-columns: 32px 1fr; gap: 16px; padding: 22px 0; }
-    a.entry .tag, a.entry .arrow { display: none; }
+    .entry { grid-template-columns: 32px 1fr; gap: 16px; padding: 22px 0; }
+    .entry .tag, .entry .arrow { display: none; }
     .manifesto { padding: 44px 20px; }
     footer { padding: 40px 20px 24px; }
   }
@@ -564,10 +583,6 @@
     background: var(--black);
     color: var(--white);
   }
-  /* View modes: Builders (default) vs Projects */
-  .project-field { display: none; }
-  body.view-projects .project-field { display: block; }
-  body.view-projects .builder-field { display: none; }
 
   /* ============ MAP VIEW ============ */
   .map-view {
@@ -641,13 +656,12 @@
 
 </style>
 </head>
-<body class="view-projects">
+<body>
 
   <!-- ============================== NAV ============================== -->
   <nav class="nav">
     <div class="links">
-      <a href="#list" data-nav-view="builders">Builders</a>
-      <a href="#list" data-nav-view="projects">Projects</a>
+      <a href="#list" data-nav-view="list">Projects</a>
       <a href="#map" data-nav-view="map">Map</a>
       <a href="#about">About</a>
       <a class="nominate" href="https://form.typeform.com/to/bPdAf8JU" target="_blank" rel="noopener">Nominate</a>
@@ -704,8 +718,7 @@
       <button type="button" class="pill" data-filter="writing">Writing</button>
       <button type="button" class="pill" data-filter="code">Code</button>
       <div class="view-toggle">
-        <button type="button" class="vbtn" data-view="builders">Builders</button>
-        <button type="button" class="vbtn active" data-view="projects">Projects</button>
+        <button type="button" class="vbtn active" data-view="list">List</button>
         <button type="button" class="vbtn" data-view="map">Map</button>
       </div>
       <div class="search-wrap">
@@ -717,101 +730,85 @@
   <!-- ============================== LIST ============================== -->
   <section class="list" id="list">
 
-    <a class="entry" href="https://trakkr.nyc/" target="_blank" rel="noopener" data-cat="code" data-tags="transit safety subway transportation commuter trakkr" data-borough="">
+    <article class="entry" data-cat="visual" data-tags="typeface art design judd foundation wayne wu madebykong type" data-borough="manhattan" data-href="https://madebykong.github.io/afterjudd/">
       <span class="idx">001</span>
       <div>
-        <div class="name builder-field">Dennis Comandante</div>
-        <div class="name project-field">Trakkr</div>
-        <div class="by builder-field">Made Trakkr — a free, live NYC transit-safety tool with incident data and route awareness for commuters.</div>
-        <div class="by project-field">A free, live NYC transit-safety tool — incident data and route awareness for commuters. Built by Dennis Comandante.</div>
+        <a class="name" href="https://madebykong.github.io/afterjudd/" target="_blank" rel="noopener">After Judd</a>
+        <div class="by">A typeface built with Claude in the (n+1) row proportions of the shelf Donald Judd made for his own kitchen — a small homage to the minimalist's quiet math. Built by <a class="maker-link" href="https://github.com/madebykong" target="_blank" rel="noopener">Wayne Wu</a>.</div>
       </div>
-      <span class="tag">Code</span>
-      <span class="arrow">→</span>
-    </a>
+      <span class="tag">Visual</span>
+      <a class="arrow" href="https://madebykong.github.io/afterjudd/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
 
-    <a class="entry" href="https://apps.apple.com/us/app/nyc-public-space/id6737332320" target="_blank" rel="noopener" data-cat="code" data-tags="parks public space open data ios chris whong civic" data-borough="">
+    <article class="entry" data-cat="code" data-tags="books library brooklyn public library data viz reading" data-borough="brooklyn" data-href="https://borrowed-brooklyn.vercel.app/">
       <span class="idx">002</span>
       <div>
-        <div class="name builder-field">Chris Whong</div>
-        <div class="name project-field">NYC Public Space App</div>
-        <div class="by builder-field">Open-data builder and civic technologist. He made the NYC Public Space App as a comprehensive guide to every park, plaza, and public area in the city.</div>
-        <div class="by project-field">A comprehensive guide to NYC's parks, plazas, and public areas — Chris Whong's open-data app for the city.</div>
+        <a class="name" href="https://borrowed-brooklyn.vercel.app/" target="_blank" rel="noopener">Borrowed Brooklyn</a>
+        <div class="by">Tracks the adult books most in demand across 12 Brooklyn Public Library branches — what's squeezed at one branch, scarce everywhere, and newly moving across the borough.</div>
       </div>
       <span class="tag">Code</span>
-      <span class="arrow">→</span>
-    </a>
+      <a class="arrow" href="https://borrowed-brooklyn.vercel.app/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
 
-    <a class="entry" href="https://isometric.nyc/" target="_blank" rel="noopener" data-cat="visual" data-tags="pixel art isometric open data interactive map andy coenen visual" data-borough="">
+    <article class="entry" data-cat="code" data-tags="emergency baguette food map nyc bread" data-borough="" data-href="https://www.emergencybaguette.com/">
       <span class="idx">003</span>
       <div>
-        <div class="name builder-field">Andy Coenen</div>
-        <div class="name project-field">Isometric NYC</div>
-        <div class="by builder-field">Creative technologist building visual experiences from civic data. Isometric NYC is his interactive pixel-art world of the city.</div>
-        <div class="by project-field">An interactive, isometric pixel-art world of New York City, built entirely from real city open data.</div>
+        <a class="name" href="https://www.emergencybaguette.com/" target="_blank" rel="noopener">Emergency Baguette</a>
+        <div class="by">A live map of the nearest baguette in the city — the bread emergency response NYC didn't know it needed.</div>
       </div>
-      <span class="tag">Visual</span>
-      <span class="arrow">→</span>
-    </a>
+      <span class="tag">Code</span>
+      <a class="arrow" href="https://www.emergencybaguette.com/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
 
-    <a class="entry" href="https://riskbyzip.com/" target="_blank" rel="noopener" data-cat="code" data-tags="climate risk alerts zip code weather flooding civic" data-borough="">
+    <article class="entry" data-cat="visual" data-tags="pixel art isometric open data interactive map andy coenen visual" data-borough="" data-href="https://isometric.nyc/">
       <span class="idx">004</span>
       <div>
-        <div class="name builder-field">Risk by Zip</div>
-        <div class="name project-field">Risk by Zip</div>
-        <div class="by builder-field">Type in any ZIP and see local climate risk plus live alerts — a quick civic lookup born out of the r/vibecoding community.</div>
-        <div class="by project-field">Type in any ZIP and see local climate risk plus live alerts — a quick civic lookup born out of the r/vibecoding community.</div>
-      </div>
-      <span class="tag">Code</span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="entry" href="https://www.emergencybaguette.com/" target="_blank" rel="noopener" data-cat="code" data-tags="emergency baguette food map nyc bread" data-borough="">
-      <span class="idx">005</span>
-      <div>
-        <div class="name builder-field">Emergency Baguette</div>
-        <div class="name project-field">Emergency Baguette</div>
-        <div class="by builder-field">A live map of the nearest baguette in the city — the bread emergency response NYC didn't know it needed.</div>
-        <div class="by project-field">A live map of the nearest baguette in the city — the bread emergency response NYC didn't know it needed.</div>
-      </div>
-      <span class="tag">Code</span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="entry" href="https://borrowed-brooklyn.vercel.app/" target="_blank" rel="noopener" data-cat="code" data-tags="books library brooklyn public library data viz reading" data-borough="brooklyn">
-      <span class="idx">006</span>
-      <div>
-        <div class="name builder-field">Borrowed Brooklyn</div>
-        <div class="name project-field">Borrowed Brooklyn</div>
-        <div class="by builder-field">Tracks the adult books most in demand across 12 Brooklyn Public Library branches — what's squeezed at one branch, scarce everywhere, and newly moving across the borough.</div>
-        <div class="by project-field">Tracks the adult books most in demand across 12 Brooklyn Public Library branches — what's squeezed at one branch, scarce everywhere, and newly moving across the borough.</div>
-      </div>
-      <span class="tag">Code</span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="entry" href="https://www.trainjazz.com/" target="_blank" rel="noopener" data-cat="music" data-tags="music subway trains jazz joshua wolk open transit data instruments" data-borough="">
-      <span class="idx">007</span>
-      <div>
-        <div class="name builder-field">Joshua Wolk</div>
-        <div class="name project-field">Train Jazz</div>
-        <div class="by builder-field">Designer and engineer who turned NYC's open transit data into music. He assigned an instrument to every line — the B is a tenor sax, the A a jazz trombone — and the trains play themselves into a live jazz combo.</div>
-        <div class="by project-field">Every NYC subway line gets an instrument; together they play a live jazz combo that shifts as the trains move. Built by Joshua Wolk from the city's open transit data.</div>
-      </div>
-      <span class="tag">Music</span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="entry" href="https://madebykong.github.io/afterjudd/" target="_blank" rel="noopener" data-cat="visual" data-tags="typeface art design judd foundation wayne wu madebykong type" data-borough="manhattan">
-      <span class="idx">008</span>
-      <div>
-        <div class="name builder-field">Wayne Wu</div>
-        <div class="name project-field">After Judd</div>
-        <div class="by builder-field">Designer working under @madebykong. After Judd is his Claude-built typeface, drawn in the (n+1) row proportions of the shelf Donald Judd made for his own kitchen.</div>
-        <div class="by project-field">A typeface built with Claude in the (n+1) row proportions of the shelf Donald Judd made for his own kitchen — a small homage to the minimalist's quiet math.</div>
+        <a class="name" href="https://isometric.nyc/" target="_blank" rel="noopener">Isometric NYC</a>
+        <div class="by">An interactive, isometric pixel-art world of New York City, built entirely from real city open data. Built by <a class="maker-link" href="https://twitter.com/_coenen" target="_blank" rel="noopener">Andy Coenen</a>.</div>
       </div>
       <span class="tag">Visual</span>
-      <span class="arrow">→</span>
-    </a>
+      <a class="arrow" href="https://isometric.nyc/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
+
+    <article class="entry" data-cat="code" data-tags="parks public space open data ios chris whong civic" data-borough="" data-href="https://apps.apple.com/us/app/nyc-public-space/id6737332320">
+      <span class="idx">005</span>
+      <div>
+        <a class="name" href="https://apps.apple.com/us/app/nyc-public-space/id6737332320" target="_blank" rel="noopener">NYC Public Space App</a>
+        <div class="by">A comprehensive guide to NYC's parks, plazas, and public areas, built on city open data. Built by <a class="maker-link" href="https://x.com/chris_whong" target="_blank" rel="noopener">Chris Whong</a>.</div>
+      </div>
+      <span class="tag">Code</span>
+      <a class="arrow" href="https://apps.apple.com/us/app/nyc-public-space/id6737332320" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
+
+    <article class="entry" data-cat="code" data-tags="climate risk alerts zip code weather flooding civic" data-borough="" data-href="https://riskbyzip.com/">
+      <span class="idx">006</span>
+      <div>
+        <a class="name" href="https://riskbyzip.com/" target="_blank" rel="noopener">Risk by Zip</a>
+        <div class="by">Type in any ZIP and see local climate risk plus live alerts — a quick civic lookup born out of the r/vibecoding community.</div>
+      </div>
+      <span class="tag">Code</span>
+      <a class="arrow" href="https://riskbyzip.com/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
+
+    <article class="entry" data-cat="code" data-tags="transit safety subway transportation commuter trakkr dennis comandante" data-borough="" data-href="https://trakkr.nyc/">
+      <span class="idx">007</span>
+      <div>
+        <a class="name" href="https://trakkr.nyc/" target="_blank" rel="noopener">Trakkr</a>
+        <div class="by">A free, live NYC transit-safety tool — incident data and route awareness for commuters. Built by Dennis Comandante.</div>
+      </div>
+      <span class="tag">Code</span>
+      <a class="arrow" href="https://trakkr.nyc/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
+
+    <article class="entry" data-cat="music" data-tags="music subway trains jazz joshua wolk open transit data instruments" data-borough="" data-href="https://www.trainjazz.com/">
+      <span class="idx">008</span>
+      <div>
+        <a class="name" href="https://www.trainjazz.com/" target="_blank" rel="noopener">Train Jazz</a>
+        <div class="by">Every NYC subway line gets an instrument; together they play a live jazz combo that shifts as the trains move through the system. Built by Joshua Wolk.</div>
+      </div>
+      <span class="tag">Music</span>
+      <a class="arrow" href="https://www.trainjazz.com/" target="_blank" rel="noopener" aria-label="Open project">→</a>
+    </article>
 
   </section>
 
@@ -896,7 +893,7 @@
 
   // Filters
   const buttons = document.querySelectorAll('.filters button[data-filter]');
-  const entries = document.querySelectorAll('a.entry');
+  const entries = document.querySelectorAll('.entry');
   const searchEl = document.getElementById('search');
   let activeFilter = 'all';
   let activeSearch = '';
@@ -937,7 +934,7 @@
     if (!target) return;
     while (target.firstChild) target.removeChild(target.firstChild);
 
-    const all = document.querySelectorAll('a.entry');
+    const all = document.querySelectorAll('.entry');
     const byBorough = {};
     all.forEach(el => {
       const b = el.dataset.borough;
@@ -959,7 +956,7 @@
         const cx = b.x1 + stepX * (col + 1);
         const cy = b.y1 + stepY * (row + 1);
         const name = entry.querySelector('.name').textContent;
-        const href = entry.getAttribute('href');
+        const href = entry.dataset.href;
         const g = document.createElementNS(SVG_NS, 'g');
         g.setAttribute('class', 'dot-group');
         const a = document.createElementNS(SVG_NS, 'a');
@@ -1004,7 +1001,6 @@
     viewButtons.forEach(x => x.classList.remove('active'));
     b.classList.add('active');
     const view = b.dataset.view;
-    document.body.classList.toggle('view-projects', view === 'projects');
     if (view === 'map') {
       listSection.classList.add('list-hidden');
       mapSection.classList.add('active');
@@ -1024,6 +1020,15 @@
       if (btn) btn.click();
       const fw = document.querySelector('.filters-wrap');
       if (fw) fw.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Row click → open project URL (let internal links handle their own clicks)
+  document.querySelectorAll('.entry').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      const href = el.dataset.href;
+      if (href) window.open(href, '_blank', 'noopener');
     });
   });
 
